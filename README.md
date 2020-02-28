@@ -9,7 +9,9 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 
 #### RF protocol:
 * Frequency: 868MHz (exact frequency: tbd)
-* Modulation: tbd
+* Modulation: tbd (nRF905 uses GFSK (Gaussian Frequency Shift Keying) by default)
+* Bitrate: tbd (nRF905 uses 100kbps by default)
+* Encoding: tbd (nRF905 uses manchester encoding by default)
 * Protocol: tbd
 
 #### Reference links
