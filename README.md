@@ -12,7 +12,37 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
 * Bitrate: tbd (nRF905 uses 100kbps by default)
 * Encoding: tbd (nRF905 uses manchester encoding by default)
-* Frame format: tbd
+* Frame format: preliminary results:
+```
+| 00 | address
+| 01 | address
+| 02 | address
+| 03 | address
+| 04 | 0x01
+| 05 | 
+| 06 | 
+| 07 | 
+| 08 | 0xFA
+| 09 | number of parameters???
+| 0A | Parameter 1: Command:
+                    0x01 = Set power
+                    0x02 = Set timer
+                    0x4A/0x4C/0x4D/0x5C/0x5E = ????
+| 0B | Parameter 2: Power:
+                    0x01=low
+                    0x02=medium
+                    0x03=high / Timer: always 0x03
+| 0C | Parameter 3: Timer: minutes
+| 0D | Parameter 4: 
+| 0E | 0x00
+| 0F | 0x00
+| 10 | 0x00
+| 11 | 0x00
+| 12 | 0x00
+| 13 | 0x00
+| 14 | CRC
+| 15 | CRC
+```
 
 #### Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
