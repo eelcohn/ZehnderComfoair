@@ -58,7 +58,7 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 ![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/Recorder.png)
 8. Make a separate recording of each of the buttons on your remote control
 9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M
-10. Go to the Analysis tab and select *Manchester I* as decoding method
+10. Go to the *Analysis* tab and select *Manchester I* as decoding method
 11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
 12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
