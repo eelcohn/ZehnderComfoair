@@ -10,8 +10,8 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 #### RF protocol:
 * Frequency: 868433000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
-* Bitrate: tbd (nRF905 uses 100kbps by default)
-* Encoding: tbd (nRF905 uses manchester encoding by default)
+* Bitrate: 100kpbs (nRF905 default)
+* Encoding: Manchester 1 (nRF905 default)
 * Frame format: preliminary results:
 ```
 | 00 | remote controller address
@@ -27,17 +27,14 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 | 0A | Parameter 1: Command:
                     0x01: Set power
                     0x02: Set timer (parameter 2 is always 0x03)
-                    0x4A: ???
-                    0x4C: ???
-                    0x4D: ???
-                    0x5C: ???
-                    0x5E: ???
+                    0x03: ??? (Reply from fan after 0x01 Set Power?)
+                    0x04: ??? (Reply?)
 | 0B | Parameter 2: Power:
                     0x01: low
                     0x02: medium
                     0x03: high (always 0x03 if command was 0x02: Timer)
-| 0C | Parameter 3: Timer: number of minutes
-| 0D | Parameter 4: ???
+| 0C | Parameter 3: Timer: number of minutes. Always 0x00 if command was 0x01.
+| 0D | Parameter 4: ??? (always 0x00 if command was 0x01 or 0x02)
 | 0E | 0x00
 | 0F | 0x00
 | 10 | 0x00
