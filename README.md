@@ -48,6 +48,20 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 | 15 | CRC
 ```
 
+#### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
+1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
+2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
+3. Start URH
+4. Go to File -> New Project and create a new project. And adjust the settings as shown below.
+5. Go to File -> Spectrum Analyzer and adjust the settings as shown below.
+6. Click Start and press a button on the Zehnder ZRF remote control. You should see a couple of pulses in the spectrum analyzer
+7. Close the Spectrum Analyzer and open the recorder with File -> Record Signal. And adjust the settings as shown below.
+8. Make a separate recording of each of the buttons on your remote control
+9. Open a signal and click on Autodetect parameters. Samples/Symbols should be 10 if you recorded with a sample rate of 1M
+10. Go to the Analysis tab and select Manchester I as decoding method
+11. Enter 1111110101 (the nRF905 preamble bits) in the Search box and click search
+12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble, select the Hex value and copy/paste them to your favourite text editor
+
 #### Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
 * [Reverse Engineering - Weather Station RF signals with an SDR and URH
