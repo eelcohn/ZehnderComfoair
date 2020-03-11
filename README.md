@@ -53,12 +53,12 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start URH
 4. Go to *File* -> *New Project* and create a new project. And adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/master/screenshots/New%20Project.png)
+![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/New%20Project.png)
 5. Go to *File* -> *Spectrum Analyzer* and adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/master/screenshots/Spectrum%20Analyzer.png)
+![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/Spectrum%20Analyzer.png)
 6. Click *Start* and press a button on the Zehnder ZRF remote control. You should see a couple of pulses in the spectrum analyzer
 7. Close the Spectrum Analyzer and open the recorder with *File* -> *Record Signal*. And adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/master/screenshots/Recorder.png)
+![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/Recorder.png)
 8. Make a separate recording of each of the buttons on your remote control
 9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M
 10. Go to the Analysis tab and select *Manchester I* as decoding method
