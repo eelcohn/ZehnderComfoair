@@ -1,7 +1,7 @@
 # Reverse engineering the Zehnder / ComfoAir ventilation remote control
 
 #### Zehnder ComfoAir RF-CMF-0.5HEX receiver
-The main ventilation unit has a seperate RF receiver which has a [PIC18F870](https://www.microchip.com/wwwproducts/en/PIC16F870) microcontroller and a [nRF905](https://infocenter.nordicsemi.com/topic/struct_nrf9/struct/nrf905.html) RF transceiver. The board has a [6-pin Molex picoblade](https://www.molex.com/molex/products/part-detail/pcb_headers/0533980671) connector, which carries the ICSP signals from the PIC microcontroller. I've tried downloading code from the PIC using a TL866A programmer, but the PIC seems to be protected. All I got were files filled with 0x00.
+The main ventilation unit has a seperate RF receiver which has a [PIC18F870](https://www.microchip.com/wwwproducts/en/PIC16F870) microcontroller and a [nRF905](https://infocenter.nordicsemi.com/topic/struct_nrf9/struct/nrf905.html) RF transceiver. The board has a [6-pin Molex picoblade](https://www.molex.com/molex/products/part-detail/pcb_headers/0533980671) connector, which carries the [ICSP](https://en.wikipedia.org/wiki/In-system_programming) signals from the PIC microcontroller. I've tried downloading code from the PIC using a TL866A programmer, but the PIC seems to be protected. All I got were files filled with 0x00.
 There also seems to be an 11-pin expansion port on the side.
 
 #### Zenhder ZRF remote controller
