@@ -57,7 +57,7 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 7. Close the Spectrum Analyzer and open the recorder with *File* -> *Record Signal*. And adjust the settings as shown below.
 ![Universal Radio Hacker - Record Signal](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Recorder.png)
 8. Make a separate recording of each of the buttons on your remote control
-9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M
+9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M (1 million samples per second at a bitrate of 100,000 bits per second makes 10 samples per bit)
 ![Universal Radio Hacker - Interpretation](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Interpretation.png)
 10. Go to the *Analysis* tab and select *Manchester I* as decoding method
 ![Universal Radio Hacker - Analysis](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Analysis.png)
