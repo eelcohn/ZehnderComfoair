@@ -44,6 +44,8 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 | 14 | CRC
 | 15 | CRC
 ```
+* Frame size: 22 bytes (the nRF905 adds 10 bytes to the payload: 4 rx address bytes, 4 tx address bytes and 2 CRC bytes)
+* nRF905 payload size: 12 bytes
 
 #### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
