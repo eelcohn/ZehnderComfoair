@@ -8,7 +8,7 @@ There also seems to be an 11-pin expansion port on the side.
 The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/comfortabele-ventilatie/zehnder-rfz) has a [PIC16F913](https://www.microchip.com/wwwproducts/en/PIC16F913) microcontroller and a [nRF905](https://infocenter.nordicsemi.com/topic/struct_nrf9/struct/nrf905.html) RF transceiver. The board has a 5-pin ICSP connector. I've also tried downloading code from the PIC on the remote control, but it's also protected.
 
 #### RF protocol:
-* Frequency: 868433000 Hz
+* Frequency: 868440000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
 * Bitrate: 100kpbs (nRF905 default)
 * Encoding: Manchester 1 (nRF905 default)
