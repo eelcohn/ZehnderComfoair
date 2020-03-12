@@ -50,17 +50,17 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start URH
 4. Go to *File* -> *New Project* and create a new project. And adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/New%20Project.png)
+![Universal Radio Hacker - New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-NewProject.png)
 5. Go to *File* -> *Spectrum Analyzer* and adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/Spectrum%20Analyzer.png)
+![Universal Radio Hacker - Spectrum Analyzer](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-SpectrumAnalyzer.png)
 6. Click *Start* and press a button on the Zehnder ZRF remote control. You should see a couple of pulses in the spectrum analyzer
 7. Close the Spectrum Analyzer and open the recorder with *File* -> *Record Signal*. And adjust the settings as shown below.
-![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/Recorder.png)
+![Universal Radio Hacker - Record Signal](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Recorder.png)
 8. Make a separate recording of each of the buttons on your remote control
 9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M
-![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Interpretation.png)
+![Universal Radio Hacker - Interpretation](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Interpretation.png)
 10. Go to the *Analysis* tab and select *Manchester I* as decoding method
-![New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Analysis.png)
+![Universal Radio Hacker - Analysis](https://github.com/eelcohn/ZehnderComfoair/blob/master/screenshots/URH-Analysis.png)
 11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
 12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
