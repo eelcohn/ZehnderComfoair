@@ -10,7 +10,7 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 #### RF protocol:
 * Frequency: 868440000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
-* Bitrate: 100kpbs (nRF905 default)
+* Bitrate: 100kbps (nRF905 default)
 * Encoding: Manchester 1 (nRF905 default)
 * Frame format: preliminary results:
 ```
@@ -23,24 +23,24 @@ The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/co
 | 06 | receiver address
 | 07 | receiver address
 | 08 | 0xFA
-| 09 | ??? (Number of parameters?)
-| 0A | Parameter 1: Command:
-                    0x01: Set power
-                    0x02: Set timer (parameter 2 is always 0x03)
-                    0x03: ??? (Reply from fan after 0x01 Set Power?)
-                    0x04: ??? (Reply?)
-| 0B | Parameter 2: Power:
-                    0x01: low
-                    0x02: medium
-                    0x03: high (always 0x03 if command was 0x02: Timer)
-| 0C | Parameter 3: Timer: number of minutes. Always 0x00 if command was 0x01.
-| 0D | Parameter 4: ??? (always 0x00 if command was 0x01 or 0x02)
-| 0E | 0x00
-| 0F | 0x00
-| 10 | 0x00
-| 11 | 0x00
-| 12 | 0x00
-| 13 | 0x00
+| 09 | Number of parameters
+| 0A | Parameter  1: Command:
+                     0x01: Set power
+                     0x02: Set timer (parameter 2 is always 0x03)
+                     0x03: ??? (Reply from fan after 0x01 Set Power?)
+                     0x04: ??? (Reply?)
+| 0B | Parameter  2: Power:
+                     0x01: low
+                     0x02: medium
+                     0x03: high (always 0x03 if command was 0x02: Timer)
+| 0C | Parameter  3: Timer: number of minutes. Always 0x00 if command was 0x01.
+| 0D | Parameter  4: ??? (always 0x00 if command was 0x01 or 0x02)
+| 0E | Parameter  5: 0x00
+| 0F | Parameter  6: 0x00
+| 10 | Parameter  7: 0x00
+| 11 | Parameter  8: 0x00
+| 12 | Parameter  9: 0x00
+| 13 | Parameter 10: 0x00
 | 14 | CRC
 | 15 | CRC
 ```
