@@ -17,7 +17,7 @@
 |  05   	| 1 byte	|         	| ?	|
 |  06   	| 1 byte	|         	| ?	|
 |  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  08   	| 1 byte	|          	| ?	|
 |  09   	| 1 byte	|         	| Command	|
 |  0A   	| 1 byte	|         	| Number of parameters	|
 |  0B   	| 1 byte	|         	| Parameter 1	|
@@ -44,7 +44,7 @@
 |  05   	| 1 byte	|         	| ?	|
 |  06   	| 1 byte	|         	| ?	|
 |  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  08   	| 1 byte	| 0x??     	| ? |
 |  09   	| 1 byte	| 0x02     	| Command	|
 |  0A   	| 1 byte	| 0x01    	| Number of parameters	|
 |  0B   	| 1 byte	| 0x01/2/3 	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
@@ -68,7 +68,7 @@
 |  05   	| 1 byte	|         	| ?	|
 |  06   	| 1 byte	|         	| ?	|
 |  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  08   	| 1 byte	| 0x??     	| ? |
 |  09   	| 1 byte	| 0x03     	| Command	|
 |  0A   	| 1 byte	| 0x02    	| Number of parameters	|
 |  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high) |
@@ -98,7 +98,7 @@ When the main unit is powered on it will be available for 10 minutes for linking
 |  05   	| 1 byte	|           	| ?	|
 |  06   	| 1 byte	|           	| ?	|
 |  07   	| 1 byte	|         	  | ?	|
-|  08   	| 1 byte	| 0xFA       	| ? (always 0xFA)	|
+|  08   	| 1 byte	| 0xFA       	| Always 0xFA	|
 |  09   	| 1 byte	| 0x06       	| Command	|
 |  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
 |  0B   	| 1 byte	|           	| Network address of main unit MSB |
@@ -126,7 +126,7 @@ When you press the *Timer* button together with one of the other buttons, the RF
 |  05   	| 1 byte	|           	| ?	|
 |  06   	| 1 byte	|           	| ?	|
 |  07   	| 1 byte	|         	  | ?	|
-|  08   	| 1 byte	| 0xFA       	| ? (always 0xFA)	|
+|  08   	| 1 byte	| 0xFA       	| Always 0xFA |
 |  09   	| 1 byte	| 0x0C       	| Command	|
 |  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
 |  0B-0E	| 4 byte	| 0xA55AA55A	| Network address for linking |
