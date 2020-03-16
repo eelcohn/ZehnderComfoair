@@ -81,6 +81,7 @@
 |  12   	| 1 byte	| 0x00    	| |
 |  13   	| 1 byte	| 0x00    	| |
 |  14-15 	| 16 bits |         	| CRC	|
+
 Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Duration is always 0x0A (10) or 0x1E (30), but this is probably customizable as well.
 
 #### Command 0x04: ??? (Reply from fan after 0x01 Set Power?)
