@@ -84,9 +84,9 @@
 
 Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Duration is always 0x0A (10) or 0x1E (30), but this is probably customizable as well.
 
-#### Command 0x04: ??? (Reply from fan after 0x01 Set Power?)
+#### Command 0x04: ???
 
-#### Command 0x05: ??? (Reply?)
+#### Command 0x05: ???
 
 #### Command 0x06: Main unit is available for linking
 When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Available for linking* packet every 420 ms.
@@ -112,9 +112,9 @@ When the main unit is powered on it will be available for 10 minutes for linking
 |  13   	| 1 byte	| 0x00      	| |
 |  14-15 	| 16 bits |           	| CRC	|
 
-#### Command 0x07: ?
+#### Command 0x07: ???
 
-#### Command 0x0B: ?
+#### Command 0x0B: ???
 
 #### Command 0x0C: RFZ remote control unit is available for linking
 When you press the *Timer* button together with one of the other buttons, the RFZ will switch to linking mode. It will now transmit a *0x0C Available for linking* package every 240ms or so.
@@ -137,7 +137,7 @@ When you press the *Timer* button together with one of the other buttons, the RF
 |  13   	| 1 byte	| 0x00      	| |
 |  14-15 	| 16 bits |           	| CRC	|
 
-#### Command 0x0D: ?
+#### Command 0x0D: ???
 
 
 
