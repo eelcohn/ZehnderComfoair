@@ -11,7 +11,7 @@
 
 | Offset  | Size   	| Value   	| Description 	|
 |:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101  | Preamble |
+|         | 6 bits	| 11110101b | Preamble |
 |  00-03  | 4 bytes |           | Network address |
 |  04   	| 1 byte	|         	| ?	|
 |  05   	| 1 byte	|         	| ?	|
@@ -38,7 +38,7 @@
 #### Command 0x02: Set power
 | Offset  | Size   	| Value   	| Description 	|
 |:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101  | Preamble |
+|         | 6 bits	| 11110101b | Preamble |
 |  00-03  | 4 bytes |           | Network address |
 |  04   	| 1 byte	|         	| ?	|
 |  05   	| 1 byte	|         	| ?	|
@@ -62,7 +62,7 @@
 
 | Offset  | Size   	| Value   	| Description 	|
 |:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101  | Preamble |
+|         | 6 bits	| 11110101b | Preamble |
 |  00-03  | 4 bytes |           | Network address |
 |  04   	| 1 byte	|         	| ?	|
 |  05   	| 1 byte	|         	| ?	|
@@ -87,10 +87,10 @@
 #### Command 0x05: ??? (Reply?)
 
 #### Command 0x06: Main unit is available for linking
-When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the 0x05: Available for linking packet every 420 ms.
+When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Available for linking* packet every 420 ms.
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:----------: |-------------	|
-|         | 6 bits	| 11110101    | Preamble |
+|         | 6 bits	| 11110101b   | Preamble |
 |  00-03  | 4 bytes | 0xA55AA55A  | Default network address for linking (always 0xA55AA55A) |
 |  04   	| 1 byte	|           	| ?	|
 |  05   	| 1 byte	|           	| ?	|
