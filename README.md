@@ -47,7 +47,7 @@
 |  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
 |  09   	| 1 byte	| 0x02     	| Command	|
 |  0A   	| 1 byte	| 0x01    	| Number of parameters	|
-|  0B   	| 1 byte	| 0x00     	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
+|  0B   	| 1 byte	| 0x01/2/3 	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
 |  0C   	| 1 byte	| 0x00    	| |
 |  0D   	| 1 byte	| 0x00    	| |
 |  0E   	| 1 byte	| 0x00    	| |
