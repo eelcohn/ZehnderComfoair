@@ -71,7 +71,7 @@
 |  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
 |  09   	| 1 byte	| 0x03     	| Command	|
 |  0A   	| 1 byte	| 0x02    	| Number of parameters	|
-|  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high, but my guess is that 0x01 or 0x02 should work as well) |
+|  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high) |
 |  0C   	| 1 byte	| 0x0A/0x1E	| Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
 |  0D   	| 1 byte	| 0x00    	| |
 |  0E   	| 1 byte	| 0x00    	| |
@@ -81,6 +81,7 @@
 |  12   	| 1 byte	| 0x00    	| |
 |  13   	| 1 byte	| 0x00    	| |
 |  14-15 	| 16 bits |         	| CRC	|
+Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Duration is always 0x0A (10) or 0x1E (30), but this is probably customizable as well.
 
 #### Command 0x04: ??? (Reply from fan after 0x01 Set Power?)
 
