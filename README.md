@@ -47,7 +47,7 @@
 |  08   	| 1 byte	| 0x??     	| ? |
 |  09   	| 1 byte	| 0x02     	| Command	|
 |  0A   	| 1 byte	| 0x01    	| Number of parameters	|
-|  0B   	| 1 byte	| 0x01/2/3 	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
+|  0B   	| 1 byte	| power    	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
 |  0C   	| 1 byte	| 0x00    	| |
 |  0D   	| 1 byte	| 0x00    	| |
 |  0E   	| 1 byte	| 0x00    	| |
@@ -72,7 +72,7 @@
 |  09   	| 1 byte	| 0x03     	| Command	|
 |  0A   	| 1 byte	| 0x02    	| Number of parameters	|
 |  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high) |
-|  0C   	| 1 byte	| 0x0A/0x1E	| Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
+|  0C   	| 1 byte	| duration	| Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
 |  0D   	| 1 byte	| 0x00    	| |
 |  0E   	| 1 byte	| 0x00    	| |
 |  0F   	| 1 byte	| 0x00    	| |
