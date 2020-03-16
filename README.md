@@ -116,7 +116,26 @@ When the main unit is powered on it will be available for 10 minutes for linking
 
 #### Command 0x0B: ?
 
-#### Command 0x0C: ?
+#### Command 0x0C: RFZ remote control unit is available for linking
+When you press the *Timer* button together with one of the other buttons, the RFZ will switch to linking mode. It will now transmit a *0x0C Available for linking* package every 240ms or so.
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:----------: |-------------	|
+|         | 6 bits	| 11110101b   | Preamble |
+|  00-03  | 4 bytes | 0xA55AA55A  | Default network address for linking (always 0xA55AA55A) |
+|  04   	| 1 byte	|           	| ?	|
+|  05   	| 1 byte	|           	| ?	|
+|  06   	| 1 byte	|           	| ?	|
+|  07   	| 1 byte	|         	  | ?	|
+|  08   	| 1 byte	| 0xFA       	| ? (always 0xFA)	|
+|  09   	| 1 byte	| 0x0C       	| Command	|
+|  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
+|  0B-0E	| 4 byte	| 0xA55AA55A	| Network address for linking |
+|  0F   	| 1 byte	| 0x00      	| |
+|  10   	| 1 byte	| 0x00    	  | |
+|  11   	| 1 byte	| 0x00     	  | |
+|  12   	| 1 byte	| 0x00      	| |
+|  13   	| 1 byte	| 0x00      	| |
+|  14-15 	| 16 bits |           	| CRC	|
 
 #### Command 0x0D: ?
 
