@@ -1,46 +1,124 @@
 # Reverse engineering the Zehnder / ComfoAir ventilation remote control
 
-#### RF protocol:
+### RF protocol:
 * Frequency: 868440000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
 * Bitrate: 100kbps (nRF905 default)
 * Encoding: Manchester 1 (nRF905 default)
-* Frame format: preliminary results:
-```
-| 00 | remote controller address
-| 01 | remote controller address
-| 02 | remote controller address
-| 03 | remote controller address
-| 04 | receiver address
-| 05 | receiver address
-| 06 | receiver address
-| 07 | receiver address
-| 08 | 0xFA
-| 09 | Number of parameters
-| 0A | Parameter  1: Command:
-                     0x01: Set power
-                     0x02: Set timer (parameter 2 is always 0x03)
-                     0x03: ??? (Reply from fan after 0x01 Set Power?)
-                     0x04: ??? (Reply?)
-| 0B | Parameter  2: Power:
-                     0x01: low
-                     0x02: medium
-                     0x03: high (always 0x03 if command was 0x02: Timer)
-| 0C | Parameter  3: Timer: number of minutes. Always 0x00 if command was 0x01.
-| 0D | Parameter  4: ??? (always 0x00 if command was 0x01 or 0x02)
-| 0E | Parameter  5: 0x00
-| 0F | Parameter  6: 0x00
-| 10 | Parameter  7: 0x00
-| 11 | Parameter  8: 0x00
-| 12 | Parameter  9: 0x00
-| 13 | Parameter 10: 0x00
-| 14 | CRC
-| 15 | CRC
-```
-* Frame size: 22 bytes (the nRF905 adds 10 bytes to the payload: 4 rx address bytes, 4 tx address bytes and 2 CRC bytes)
-* nRF905 payload size: 12 bytes
+* Frame size: 6 bit preamble + 22 bytes (the nRF905 adds 6 bytes to the payload: 4 rx address bytes and 2 CRC bytes)
+* nRF905 payload size: 16 bytes (from offset 0x04 to 0x13)
+* Frame format:
 
-#### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
+| Offset  | Size   	| Value   	| Description 	|
+|:------: |:------:	|:-------:	|-------------	|
+|         | 6 bits	| 11110101  | Preamble |
+|  00-03  | 4 bytes |           | Network address |
+|  04   	| 1 byte	|         	| ?	|
+|  05   	| 1 byte	|         	| ?	|
+|  06   	| 1 byte	|         	| ?	|
+|  07   	| 1 byte	|         	| ?	|
+|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  09   	| 1 byte	|         	| Command	|
+|  0A   	| 1 byte	|         	| Number of parameters	|
+|  0B   	| 1 byte	|         	| Parameter 1	|
+|  0C   	| 1 byte	|         	| Parameter 2	|
+|  0D   	| 1 byte	|         	| Parameter 3	|
+|  0E   	| 1 byte	|         	| Parameter 4	|
+|  0F   	| 1 byte	|         	| Parameter 5	|
+|  10   	| 1 byte	|         	| Parameter 6	|
+|  11   	| 1 byte	|         	| Parameter 7	|
+|  12   	| 1 byte	|         	| Parameter 8	|
+|  13   	| 1 byte	|         	| Parameter 9	|
+|  14-15 	| 16 bits |         	| CRC	|
+
+### Commands:
+
+#### Command 0x01: ???
+
+#### Command 0x02: Set power
+| Offset  | Size   	| Value   	| Description 	|
+|:------: |:------:	|:-------:	|-------------	|
+|         | 6 bits	| 11110101  | Preamble |
+|  00-03  | 4 bytes |           | Network address |
+|  04   	| 1 byte	|         	| ?	|
+|  05   	| 1 byte	|         	| ?	|
+|  06   	| 1 byte	|         	| ?	|
+|  07   	| 1 byte	|         	| ?	|
+|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  09   	| 1 byte	| 0x02     	| Command	|
+|  0A   	| 1 byte	| 0x01    	| Number of parameters	|
+|  0B   	| 1 byte	| 0x00     	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
+|  0C   	| 1 byte	| 0x00    	| |
+|  0D   	| 1 byte	| 0x00    	| |
+|  0E   	| 1 byte	| 0x00    	| |
+|  0F   	| 1 byte	| 0x00    	| |
+|  10   	| 1 byte	| 0x00    	| |
+|  11   	| 1 byte	| 0x00    	| |
+|  12   	| 1 byte	| 0x00    	| |
+|  13   	| 1 byte	| 0x00    	| |
+|  14-15 	| 16 bits |         	| CRC	|
+
+#### Command 0x03: Set timer
+| Offset  | Size   	| Value   	| Description 	|
+|:------: |:------:	|:-------:	|-------------	|
+|         | 6 bits	| 11110101  | Preamble |
+|  00-03  | 4 bytes |           | Network address |
+|  04   	| 1 byte	|         	| ?	|
+|  05   	| 1 byte	|         	| ?	|
+|  06   	| 1 byte	|         	| ?	|
+|  07   	| 1 byte	|         	| ?	|
+|  08   	| 1 byte	| 0xFA     	| ? (always 0xFA)	|
+|  09   	| 1 byte	| 0x03     	| Command	|
+|  0A   	| 1 byte	| 0x02    	| Number of parameters	|
+|  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high, but my guess is that 0x01 or 0x02 should work as well) |
+|  0C   	| 1 byte	| 0x0A/0x1E	| Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
+|  0D   	| 1 byte	| 0x00    	| |
+|  0E   	| 1 byte	| 0x00    	| |
+|  0F   	| 1 byte	| 0x00    	| |
+|  10   	| 1 byte	| 0x00    	| |
+|  11   	| 1 byte	| 0x00    	| |
+|  12   	| 1 byte	| 0x00    	| |
+|  13   	| 1 byte	| 0x00    	| |
+|  14-15 	| 16 bits |         	| CRC	|
+
+#### Command 0x04: ??? (Reply from fan after 0x01 Set Power?)
+
+#### Command 0x05: ??? (Reply?)
+
+#### Command 0x06: Main unit is available for linking
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:----------: |-------------	|
+|         | 6 bits	| 11110101    | Preamble |
+|  00-03  | 4 bytes | 0xA55AA55A  | Default network address for linking (always 0xA55AA55A) |
+|  04   	| 1 byte	|           	| ?	|
+|  05   	| 1 byte	|           	| ?	|
+|  06   	| 1 byte	|           	| ?	|
+|  07   	| 1 byte	|         	  | ?	|
+|  08   	| 1 byte	| 0xFA       	| ? (always 0xFA)	|
+|  09   	| 1 byte	| 0x06       	| Command	|
+|  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
+|  0B   	| 1 byte	|           	| Network address of main unit MSB |
+|  0C   	| 1 byte	|            	| Network address of main unit |
+|  0D   	| 1 byte	|           	| Network address of main unit |
+|  0E   	| 1 byte	|           	| Network address of main unit LSB |
+|  0F   	| 1 byte	| 0x00      	| |
+|  10   	| 1 byte	| 0x00    	  | |
+|  11   	| 1 byte	| 0x00     	  | |
+|  12   	| 1 byte	| 0x00      	| |
+|  13   	| 1 byte	| 0x00      	| |
+|  14-15 	| 16 bits |           	| CRC	|
+
+#### Command 0x07: ?
+
+#### Command 0x0B: ?
+
+#### Command 0x0C: ?
+
+#### Command 0x0D: ?
+
+
+
+### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start URH
@@ -59,6 +137,8 @@
 11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
 12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
+### Units:
+
 #### Zehnder ComfoAir RF-CMF-0.5HEX receiver
 The main ventilation unit has a seperate RF receiver which has a [PIC16F870](https://www.microchip.com/wwwproducts/en/PIC16F870) microcontroller and a [nRF905](https://infocenter.nordicsemi.com/topic/struct_nrf9/struct/nrf905.html) RF transceiver. The board has a [6-pin Molex picoblade](https://www.molex.com/molex/products/part-detail/pcb_headers/0533980671) connector, which carries the [ICSP](https://en.wikipedia.org/wiki/In-system_programming) signals from the PIC microcontroller. I've tried downloading code from the PIC using a TL866A programmer, but the PIC seems to be protected. All I got were files filled with 0x00.
 There also seems to be an 11-pin expansion port on the side.
@@ -68,7 +148,7 @@ There also seems to be an 11-pin expansion port on the side.
 The [Zehnder RFZ remote control](https://www.zehnder.nl/producten-en-systemen/comfortabele-ventilatie/zehnder-rfz) has a [PIC16F913](https://www.microchip.com/wwwproducts/en/PIC16F913) microcontroller and a [nRF905](https://infocenter.nordicsemi.com/topic/struct_nrf9/struct/nrf905.html) RF transceiver. The board has a 5-pin ICSP connector. I've also tried downloading code from the PIC on the remote control, but it's also protected. Remove the battery from the PCB if you want to try this yourself!
 ![Zenhder ZRF remote controller - PCB layout](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/ZRF.png)
 
-#### Reference links
+### Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
 * [Reverse Engineering - Weather Station RF signals with an SDR and URH
 ](https://docs.google.com/document/d/1yjAO3jTBa9lAFIuiteK_GLWh7-Xk-kSD2d0DUxQe_vU/edit)
