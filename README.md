@@ -59,6 +59,7 @@
 |  14-15 	| 16 bits |         	| CRC	|
 
 #### Command 0x03: Set timer
+
 | Offset  | Size   	| Value   	| Description 	|
 |:------: |:------:	|:-------:	|-------------	|
 |         | 6 bits	| 11110101  | Preamble |
@@ -86,6 +87,7 @@
 #### Command 0x05: ??? (Reply?)
 
 #### Command 0x06: Main unit is available for linking
+When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the 0x05: Available for linking packet every 420 ms.
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:----------: |-------------	|
 |         | 6 bits	| 11110101    | Preamble |
