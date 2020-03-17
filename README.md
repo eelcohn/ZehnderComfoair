@@ -9,9 +9,16 @@
 * nRF905 payload size: 16 bytes (from offset `0x04` to `0x13`)
 * Frame format:
 
-| Preamble    | Network Address |  ?  |  ?  |  ?  |  ?  | Command | Parameter count | Parameters | 16-bit CRC |
-|:-----------:|:---------------:|:---:|:---:|:---:|:---:|:-------:|:---------------:|:----------:|:----------:|
-| 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
+| Preamble    | Network<br>Address | Rx<br>Type | Rx<br>ID | Tx<br>Type | Tx<br>ID | TTL | Command | Parameter count | Parameters | 16-bit CRC |
+|:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
+| 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
+
+* Transmitter and receiver types:
+
+| Value | Description        |
+|:-----:|:-------------------|
+| 0x01  | Main Unit          |
+| 0x03  | RFZ remote control |
 
 ### Commands:
 
@@ -24,11 +31,11 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|           	| ?	|
-|  08   	| 1 byte	| 0x??     	  | ? |
+|  04   	| 1 byte	|           	| Receiver Type	|
+|  05   	| 1 byte	|           	| Receiver ID	|
+|  06   	| 1 byte	|           	| Transmitter Type |
+|  07   	| 1 byte	|           	| Transmitter ID |
+|  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	| 0x02       	| Command:<br>0x02: Set power	|
 |  0A   	| 1 byte	| 0x01      	| Number of parameters:<br>1 parameter	|
 |  0B   	| 1 byte	| power      	| Power:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
@@ -48,11 +55,11 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|           	| ?	|
-|  08   	| 1 byte	| 0x??       	| ? |
+|  04   	| 1 byte	|           	| Receiver Type |
+|  05   	| 1 byte	|           	| Receiver ID |
+|  06   	| 1 byte	|           	| Transmitter Type	|
+|  07   	| 1 byte	|           	| Transmitter ID |
+|  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	| 0x03       	| Command:<br>0x03: Set timer	|
 |  0A   	| 1 byte	| 0x02      	| Number of parameters:<br>2 parameters 	|
 |  0B   	| 1 byte	| 0x03       	| Power:<br>Always `0x03`: high |
@@ -70,27 +77,27 @@ Power is always `0x03`, but my guess is that `0x01` or `0x02` should work as wel
 
 #### Command 0x04: ???
 To do.
-| Offset  | Size   	| Value   	    | Description 	|
-|:------: |:------:	|:-------------:|-------------	|
-|         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes |               | Network address |
-|  04   	| 1 byte	|             	| ?	|
-|  05   	| 1 byte	|             	| ?	|
-|  06   	| 1 byte	|             	| ?	|
-|  07   	| 1 byte	|           	  | ?	|
-|  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
-|  09   	| 1 byte	| 0x04         	| Command:<br>0x04: ?????	|
-|  0A   	| 1 byte	| 0x04    	    | Number of parameters:<br>4 parameters|
-|  0B   	| 1 byte	|              	| Network address of main unit MSB |
-|  0C   	| 1 byte	|              	| Network address of main unit |
-|  0D   	| 1 byte	|             	| Network address of main unit |
-|  0E   	| 1 byte	|             	| Network address of main unit LSB |
-|  0F   	| 1 byte	| 0x00        	| |
-|  10   	| 1 byte	| 0x00      	  | |
-|  11   	| 1 byte	| 0x00       	  | |
-|  12   	| 1 byte	| 0x00         	| |
-|  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 2 bytes |              	| 16-bit CRC	|
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|           	| Receiver Type |
+|  05   	| 1 byte	|           	| Receiver ID	|
+|  06   	| 1 byte	|           	| Transmitter Type	|
+|  07   	| 1 byte	|             | Transmitter ID |
+|  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
+|  09   	| 1 byte	| 0x04       	| Command:<br>0x04: ?????	|
+|  0A   	| 1 byte	| 0x04    	  | Number of parameters:<br>4 parameters|
+|  0B   	| 1 byte	|            	| Network address of main unit MSB |
+|  0C   	| 1 byte	|            	| Network address of main unit |
+|  0D   	| 1 byte	|             | Network address of main unit |
+|  0E   	| 1 byte	|             | Network address of main unit LSB |
+|  0F   	| 1 byte	| 0x00        | |
+|  10   	| 1 byte	| 0x00      	| |
+|  11   	| 1 byte	| 0x00       	| |
+|  12   	| 1 byte	| 0x00        | |
+|  13   	| 1 byte	| 0x00      	| |
+|  14-15 	| 2 bytes |             | 16-bit CRC	|
 
 Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network address at `0x00-0x03`. This frame is only sent by the RFZ during the linking sequence.
 
@@ -100,11 +107,11 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|           	| ?	|
-|  08   	| 1 byte	| 0x??     	  | ? |
+|  04   	| 1 byte	|           	| Receiver Type	|
+|  05   	| 1 byte	|           	| Receiver ID	|
+|  06   	| 1 byte	|           	| Transmitter Type	|
+|  07   	| 1 byte	|           	| Transmitter ID |
+|  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	| 0x05       	| Command:<br>0x05: ???	|
 |  0A   	| 1 byte	| 0x03      	| Number of parameters:<br>3 parameters |
 |  0B   	| 1 byte	| ????      	| ????? |
@@ -134,27 +141,27 @@ Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
 
 #### Command 0x06: Main unit available for linking
 When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Main unit available for linking* frame every 420 ms.
-| Offset  | Size   	| Value   	    | Description 	|
-|:------: |:------:	|:-------------:|-------------	|
-|         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes | 0xA55AA55A    | Network address:<br>always `0xA55AA55A`: Default network address for linking |
-|  04   	| 1 byte	|             	| ?	|
-|  05   	| 1 byte	|             	| ?	|
-|  06   	| 1 byte	|             	| ?	|
-|  07   	| 1 byte	|           	  | ?	|
-|  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
-|  09   	| 1 byte	| 0x06         	| Command:<br>0x06: Main unit available for linking	|
-|  0A   	| 1 byte	| 0x04    	    | Number of parameters:<br>4 parameters|
-|  0B   	| 1 byte	|              	| Network address of main unit MSB |
-|  0C   	| 1 byte	|              	| Network address of main unit |
-|  0D   	| 1 byte	|             	| Network address of main unit |
-|  0E   	| 1 byte	|             	| Network address of main unit LSB |
-|  0F   	| 1 byte	| 0x00        	| |
-|  10   	| 1 byte	| 0x00      	  | |
-|  11   	| 1 byte	| 0x00       	  | |
-|  12   	| 1 byte	| 0x00         	| |
-|  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 2 bytes |              	| 16-bit CRC	|
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes | 0xA55AA55A  | Network address:<br>always `0xA55AA55A`: Default network address for linking |
+|  04   	| 1 byte	|            	| Receiver Type	|
+|  05   	| 1 byte	|            	| Receiver ID	|
+|  06   	| 1 byte	|            	| Transmitter Type	|
+|  07   	| 1 byte	|          	  | Transmitter ID |
+|  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
+|  09   	| 1 byte	| 0x06       	| Command:<br>0x06: Main unit available for linking	|
+|  0A   	| 1 byte	| 0x04   	    | Number of parameters:<br>4 parameters|
+|  0B   	| 1 byte	|            	| Network address of main unit MSB |
+|  0C   	| 1 byte	|            	| Network address of main unit |
+|  0D   	| 1 byte	|            	| Network address of main unit |
+|  0E   	| 1 byte	|            	| Network address of main unit LSB |
+|  0F   	| 1 byte	| 0x00       	| |
+|  10   	| 1 byte	| 0x00    	  | |
+|  11   	| 1 byte	| 0x00     	  | |
+|  12   	| 1 byte	| 0x00       	| |
+|  13   	| 1 byte	| 0x00     	  | |
+|  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 #### Command 0x07: ???
 To do.
@@ -162,11 +169,11 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|           	| ?	|
-|  08   	| 1 byte	| 0x??     	  | ? |
+|  04   	| 1 byte	|           	| Receiver Type	|
+|  05   	| 1 byte	|           	| Receiver ID	|
+|  06   	| 1 byte	|           	| Transmitter Type	|
+|  07   	| 1 byte	|           	| Transmitter ID |
+|  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	| 0x07       	| Command:<br>0x07: ???	|
 |  0A   	| 1 byte	| 0x04      	| Number of parameters:<br>4 parameters	|
 |  0B   	| 1 byte	| ????      	| ????? |
@@ -199,72 +206,72 @@ I haven't captured any frames of this type yet.
 
 #### Command 0x0B: Linking successful
 This package is sent to acknowledge that a device has been successfully linked. The Main Unit will send it first, and the RFZ responds by also sending this frame.
-| Offset  | Size   	| Value   	    | Description 	|
-|:------: |:------:	|:-------------:|-------------	|
-|         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes | 0xA55AA55A    | Network address:<br>always `0xA55AA55A`: Default network address for linking |
-|  04   	| 1 byte	|             	| ?	|
-|  05   	| 1 byte	|             	| ?	|
-|  06   	| 1 byte	|             	| ?	|
-|  07   	| 1 byte	|           	  | ?	|
-|  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
-|  09   	| 1 byte	| 0x0B         	| Command:<br>0x0B: Linking successful	|
-|  0A   	| 1 byte	| 0x00    	    | Number of parameters:<br>no parameters|
-|  0B   	| 1 byte	| 0x00         	| |
-|  0C   	| 1 byte	| 0x00         	| |
-|  0D   	| 1 byte	| 0x00        	| |
-|  0E   	| 1 byte	| 0x00        	| |
-|  0F   	| 1 byte	| 0x00        	| |
-|  10   	| 1 byte	| 0x00      	  | |
-|  11   	| 1 byte	| 0x00       	  | |
-|  12   	| 1 byte	| 0x00         	| |
-|  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 2 bytes |              	| 16-bit CRC	|
+| Offset  | Size   	| Value  	    | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes | 0xA55AA55A  | Network address:<br>always `0xA55AA55A`: Default network address for linking |
+|  04   	| 1 byte	|            	| Receiver Type	|
+|  05   	| 1 byte	|            	| Receiver ID |
+|  06   	| 1 byte	|            	| Transmitter Type |
+|  07   	| 1 byte	|             | Transmitter ID |
+|  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
+|  09   	| 1 byte	| 0x0B       	| Command:<br>0x0B: Linking successful	|
+|  0A   	| 1 byte	| 0x00    	  | Number of parameters:<br>no parameters|
+|  0B   	| 1 byte	| 0x00       	| |
+|  0C   	| 1 byte	| 0x00       	| |
+|  0D   	| 1 byte	| 0x00      	| |
+|  0E   	| 1 byte	| 0x00      	| |
+|  0F   	| 1 byte	| 0x00       	| |
+|  10   	| 1 byte	| 0x00        | |
+|  11   	| 1 byte	| 0x00        | |
+|  12   	| 1 byte	| 0x00       	| |
+|  13   	| 1 byte	| 0x00        | |
+|  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 #### Command 0x0C: RFZ available for linking
 When you press the *Timer* button together with one of the other buttons on the RFZ remote control unit, the RFZ will switch to linking mode. It will now transmit a *0x0C: RFZ available for linking* frame every 240ms or so.
-| Offset  | Size   	| Value   	    | Description 	|
-|:------: |:------:	|:-------------:|-------------	|
-|         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes |               | Network address:<br>* either the RFZ's currently linked network address<br>* or `0xA55AA55A`: default network address for linking |
-|  04   	| 1 byte	|             	| ?	|
-|  05   	| 1 byte	|             	| ?	|
-|  06   	| 1 byte	|             	| ?	|
-|  07   	| 1 byte	|           	  | ?	|
-|  08   	| 1 byte	| 0xFA         	| Always 0xFA |
-|  09   	| 1 byte	| 0x0C         	| Command:<br>0x0C: RFZ available for linking	|
-|  0A   	| 1 byte	| 0x04      	  | Number of parameters:<br>4 parameters	|
-|  0B-0E	| 4 byte	| 0xA55AA55A  	| Network address for linking |
-|  0F   	| 1 byte	| 0x00        	| |
-|  10   	| 1 byte	| 0x00      	  | |
-|  11   	| 1 byte	| 0x00     	    | |
-|  12   	| 1 byte	| 0x00        	| |
-|  13   	| 1 byte	| 0x00        	| |
-|  14-15 	| 2 bytes |             	| 16-bit CRC	|
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address:<br>* either the RFZ's currently linked network address<br>* or `0xA55AA55A`: default network address for linking |
+|  04   	| 1 byte	|            	| Receiver Type |
+|  05   	| 1 byte	|            	| Receiver ID	|
+|  06   	| 1 byte	|            	| Transmitter Type |
+|  07   	| 1 byte	|             | Transmitter ID |
+|  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
+|  09   	| 1 byte	| 0x0C       	| Command:<br>0x0C: RFZ available for linking	|
+|  0A   	| 1 byte	| 0x04        | Number of parameters:<br>4 parameters	|
+|  0B-0E	| 4 byte	| 0xA55AA55A 	| Network address for linking |
+|  0F   	| 1 byte	| 0x00       	| |
+|  10   	| 1 byte	| 0x00        | |
+|  11   	| 1 byte	| 0x00     	  | |
+|  12   	| 1 byte	| 0x00       	| |
+|  13   	| 1 byte	| 0x00       	| |
+|  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 #### Command 0x0D: ???
 To do.
-| Offset  | Size   	| Value   	    | Description 	|
-|:------: |:------:	|:-------------:|-------------	|
-|         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes |               | Network address |
-|  04   	| 1 byte	|             	| ?	|
-|  05   	| 1 byte	|             	| ?	|
-|  06   	| 1 byte	|             	| ?	|
-|  07   	| 1 byte	|           	  | ?	|
-|  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
-|  09   	| 1 byte	| 0x0D         	| Command:<br>0x0D: ?????	|
-|  0A   	| 1 byte	| 0x00    	    | Number of parameters:<br>0 parameters|
-|  0B   	| 1 byte	| 0x00         	| |
-|  0C   	| 1 byte	| 0x00         	| |
-|  0D   	| 1 byte	| 0x00        	| |
-|  0E   	| 1 byte	| 0x00        	| |
-|  0F   	| 1 byte	| 0x00        	| |
-|  10   	| 1 byte	| 0x00      	  | |
-|  11   	| 1 byte	| 0x00       	  | |
-|  12   	| 1 byte	| 0x00         	| |
-|  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 2 bytes |              	| 16-bit CRC	|
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|            	| Receiver Type	|
+|  05   	| 1 byte	|            	| Receiver ID	|
+|  06   	| 1 byte	|            	| Transmitter Type |
+|  07   	| 1 byte	|             | Transmitter ID |
+|  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
+|  09   	| 1 byte	| 0x0D       	| Command:<br>0x0D: ?????	|
+|  0A   	| 1 byte	| 0x00    	  | Number of parameters:<br>0 parameters|
+|  0B   	| 1 byte	| 0x00       	| |
+|  0C   	| 1 byte	| 0x00       	| |
+|  0D   	| 1 byte	| 0x00      	| |
+|  0E   	| 1 byte	| 0x00       	| |
+|  0F   	| 1 byte	| 0x00       	| |
+|  10   	| 1 byte	| 0x00        | |
+|  11   	| 1 byte	| 0x00        | |
+|  12   	| 1 byte	| 0x00       	| |
+|  13   	| 1 byte	| 0x00        | |
+|  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 ### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
