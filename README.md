@@ -11,7 +11,7 @@
 
 | Preamble    | Network Address |  ?  |  ?  |  ?  |  ?  | Command | Parameter count | Parameters | 16-bit CRC |
 |:-----------:|:---------------:|:---:|:---:|:---:|:---:|---------|-----------------|------------|------------|
-| 10-bits 1111110101  | 4 bytes         |  ?  |  ?  |  ?  |  ?  | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
+| 10-bits<br>1111110101  | 4 bytes         |  ?  |  ?  |  ?  |  ?  | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
 
 ### Commands:
 
@@ -27,9 +27,9 @@
 |  06   	| 1 byte	|           	| ?	|
 |  07   	| 1 byte	|           	| ?	|
 |  08   	| 1 byte	| 0x??     	  | ? |
-|  09   	| 1 byte	| 0x02       	| Command	|
-|  0A   	| 1 byte	| 0x01      	| Number of parameters	|
-|  0B   	| 1 byte	| power      	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
+|  09   	| 1 byte	| 0x02       	| Command:<br>0x02: Set power	|
+|  0A   	| 1 byte	| 0x01      	| Number of parameters:<br>1 parameter	|
+|  0B   	| 1 byte	| power      	| Power:<br>0x01: low<br>0x02: medium<br>0x03: high |
 |  0C   	| 1 byte	| 0x00      	| |
 |  0D   	| 1 byte	| 0x00      	| |
 |  0E   	| 1 byte	| 0x00      	| |
@@ -51,10 +51,10 @@
 |  06   	| 1 byte	|           	| ?	|
 |  07   	| 1 byte	|           	| ?	|
 |  08   	| 1 byte	| 0x??       	| ? |
-|  09   	| 1 byte	| 0x03       	| Command	|
-|  0A   	| 1 byte	| 0x02      	| Number of parameters	|
-|  0B   	| 1 byte	| 0x03       	| Power (always 0x03: high) |
-|  0C   	| 1 byte	| duration	  | Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
+|  09   	| 1 byte	| 0x03       	| Command:<br>0x03: Set timer	|
+|  0A   	| 1 byte	| 0x02      	| Number of parameters:<br>2 parameters 	|
+|  0B   	| 1 byte	| 0x03       	| Power:<br>Always 0x03: high |
+|  0C   	| 1 byte	| duration	  | Duration:<br>0x0A: 10 minutes<br>0x1E: 30 minutes |
 |  0D   	| 1 byte	| 0x00      	| |
 |  0E   	| 1 byte	| 0x00      	| |
 |  0F   	| 1 byte	| 0x00      	| |
@@ -70,19 +70,19 @@ Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Dur
 
 #### Command 0x05: ???
 
-#### Command 0x06: Main unit is available for linking
+#### Command 0x06: Main unit available for linking
 When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Available for linking* frame every 420 ms.
 | Offset  | Size   	| Value   	    | Description 	|
 |:------: |:------:	|:-------------:|-------------	|
 |         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes | 0xA55AA55A    | Default network address for linking (always 0xA55AA55A) |
+|  00-03  | 4 bytes | 0xA55AA55A    | Network address:<br>always 0xA55AA55A: Default network address for linking |
 |  04   	| 1 byte	|             	| ?	|
 |  05   	| 1 byte	|             	| ?	|
 |  06   	| 1 byte	|             	| ?	|
 |  07   	| 1 byte	|           	  | ?	|
 |  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
-|  09   	| 1 byte	| 0x06         	| Command	|
-|  0A   	| 1 byte	| 0x04    	    | Number of parameters	|
+|  09   	| 1 byte	| 0x06         	| Command:<br>0x06: Main unit available for linking	|
+|  0A   	| 1 byte	| 0x04    	    | Number of parameters:<br>4 parameters|
 |  0B   	| 1 byte	|              	| Network address of main unit MSB |
 |  0C   	| 1 byte	|              	| Network address of main unit |
 |  0D   	| 1 byte	|             	| Network address of main unit |
@@ -103,14 +103,14 @@ When you press the *Timer* button together with one of the other buttons, the RF
 | Offset  | Size   	| Value   	    | Description 	|
 |:------: |:------:	|:-------------:|-------------	|
 |         | 6 bits	| 1111110101b   | Preamble |
-|  00-03  | 4 bytes |               | Network address (can either be the RFZ's currently linked network address or 0xA55AA55A) |
+|  00-03  | 4 bytes |               | Network address:<br>* either the RFZ's currently linked network address<br>* or 0xA55AA55A: default network address for linking |
 |  04   	| 1 byte	|             	| ?	|
 |  05   	| 1 byte	|             	| ?	|
 |  06   	| 1 byte	|             	| ?	|
 |  07   	| 1 byte	|           	  | ?	|
 |  08   	| 1 byte	| 0xFA         	| Always 0xFA |
-|  09   	| 1 byte	| 0x0C         	| Command	|
-|  0A   	| 1 byte	| 0x04      	  | Number of parameters	|
+|  09   	| 1 byte	| 0x0C         	| Command:<br>0x0C: RFZ available for linking	|
+|  0A   	| 1 byte	| 0x04      	  | Number of parameters:<br>4 parameters	|
 |  0B-0E	| 4 byte	| 0xA55AA55A  	| Network address for linking |
 |  0F   	| 1 byte	| 0x00        	| |
 |  10   	| 1 byte	| 0x00      	  | |
