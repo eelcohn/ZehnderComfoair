@@ -14,14 +14,14 @@
 |:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
 | 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
 
-Transmitter and receiver types:
+##### Transmitter and receiver types:
 
 | Value | Type               |
 |:-----:|:-------------------|
 | 0x01  | Main Unit          |
 | 0x03  | RFZ remote control |
 
-Commands:
+##### Commands:
 
 | Value | Command                         |
 |:-----:|:--------------------------------|
