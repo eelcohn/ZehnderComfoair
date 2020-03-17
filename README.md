@@ -40,7 +40,7 @@ To do.
 |  11   	| 1 byte	| 0x00      	| |
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00    	  | |
-|  14-15 	| 16 bits |         	  | CRC	|
+|  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
 #### Command 0x03: Set timer
 To do.
@@ -64,12 +64,12 @@ To do.
 |  11   	| 1 byte	| 0x00      	| |
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00      	| |
-|  14-15 	| 16 bits |         	  | CRC	|
+|  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
 Power is always `0x03`, but my guess is that `0x01` or `0x02` should work as well. Duration is always `0x0A` (10) or `0x1E` (30), but this is probably customizable as well.
 
 #### Command 0x04: ???
-To do. Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network address at `0x00-0x03`. This frame is only sent by the RFZ during the linking sequence.
+To do.
 | Offset  | Size   	| Value   	    | Description 	|
 |:------: |:------:	|:-------------:|-------------	|
 |         | 6 bits	| 1111110101b   | Preamble |
@@ -90,23 +90,11 @@ To do. Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network 
 |  11   	| 1 byte	| 0x00       	  | |
 |  12   	| 1 byte	| 0x00         	| |
 |  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 16 bits |              	| CRC	|
+|  14-15 	| 2 bytes |              	| 16-bit CRC	|
+Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network address at `0x00-0x03`. This frame is only sent by the RFZ during the linking sequence.
 
 #### Command 0x05: ???
-To do. Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
-```
-0x49, 0x02, 0x20
-0x4A, 0x02, 0x20
-0x4B, 0x02, 0x20
-0x4C, 0x02, 0x20
-0x4D, 0x02, 0x20
-0x54, 0x03, 0x20
-0x57, 0x03, 0x20
-0x5C, 0x03, 0x20
-0x5D, 0x03, 0x20
-0x5E, 0x03, 0x20
-```
-
+To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
@@ -127,7 +115,20 @@ To do. Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
 |  11   	| 1 byte	| 0x00      	| |
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00    	  | |
-|  14-15 	| 16 bits |         	  | CRC	|
+|  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
+```
+0x49, 0x02, 0x20
+0x4A, 0x02, 0x20
+0x4B, 0x02, 0x20
+0x4C, 0x02, 0x20
+0x4D, 0x02, 0x20
+0x54, 0x03, 0x20
+0x57, 0x03, 0x20
+0x5C, 0x03, 0x20
+0x5D, 0x03, 0x20
+0x5E, 0x03, 0x20
+```
 
 #### Command 0x06: Main unit available for linking
 When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Main unit available for linking* frame every 420 ms.
@@ -151,16 +152,10 @@ When the main unit is powered on it will be available for 10 minutes for linking
 |  11   	| 1 byte	| 0x00       	  | |
 |  12   	| 1 byte	| 0x00         	| |
 |  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 16 bits |              	| CRC	|
+|  14-15 	| 2 bytes |              	| 16-bit CRC	|
 
 #### Command 0x07: ???
-To do. Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
-```
-0x01, 0x1E, 0x00, 0x05
-0x02, 0x32, 0x00, 0x05
-0x03, 0x5A, 0x00, 0x05
-0x03, 0x5A, 0x01, 0x05
-```
+To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
 |         | 6 bits	| 1111110101b | Preamble |
@@ -181,7 +176,14 @@ To do. Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
 |  11   	| 1 byte	| 0x00      	| |
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00    	  | |
-|  14-15 	| 16 bits |         	  | CRC	|
+|  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
+```
+0x01, 0x1E, 0x00, 0x05
+0x02, 0x32, 0x00, 0x05
+0x03, 0x5A, 0x00, 0x05
+0x03, 0x5A, 0x01, 0x05
+```
 
 #### Command 0x08: ???
 I haven't captured any frames of this type yet.
@@ -214,7 +216,7 @@ This package is sent to acknowledge that a device has been successfully linked. 
 |  11   	| 1 byte	| 0x00       	  | |
 |  12   	| 1 byte	| 0x00         	| |
 |  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 16 bits |              	| CRC	|
+|  14-15 	| 2 bytes |              	| 16-bit CRC	|
 
 #### Command 0x0C: RFZ available for linking
 When you press the *Timer* button together with one of the other buttons on the RFZ remote control unit, the RFZ will switch to linking mode. It will now transmit a *0x0C: RFZ available for linking* frame every 240ms or so.
@@ -235,7 +237,7 @@ When you press the *Timer* button together with one of the other buttons on the 
 |  11   	| 1 byte	| 0x00     	    | |
 |  12   	| 1 byte	| 0x00        	| |
 |  13   	| 1 byte	| 0x00        	| |
-|  14-15 	| 16 bits |             	| CRC	|
+|  14-15 	| 2 bytes |             	| 16-bit CRC	|
 
 #### Command 0x0D: ???
 To do.
@@ -249,7 +251,7 @@ To do.
 |  07   	| 1 byte	|           	  | ?	|
 |  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
 |  09   	| 1 byte	| 0x0D         	| Command:<br>0x0D: ?????	|
-|  0A   	| 1 byte	| 0x00    	    | Number of parameters:<br>no parameters|
+|  0A   	| 1 byte	| 0x00    	    | Number of parameters:<br>0 parameters|
 |  0B   	| 1 byte	| 0x00         	| |
 |  0C   	| 1 byte	| 0x00         	| |
 |  0D   	| 1 byte	| 0x00        	| |
@@ -259,7 +261,7 @@ To do.
 |  11   	| 1 byte	| 0x00       	  | |
 |  12   	| 1 byte	| 0x00         	| |
 |  13   	| 1 byte	| 0x00      	  | |
-|  14-15 	| 16 bits |              	| CRC	|
+|  14-15 	| 2 bytes |              	| 16-bit CRC	|
 
 ### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
