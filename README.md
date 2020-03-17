@@ -13,28 +13,6 @@
 |:-----------:|:---------------:|:---:|:---:|:---:|:---:|---------|-----------------|------------|------------|
 | 10-bits 1111110101  | 4 bytes         |  ?  |  ?  |  ?  |  ?  | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
 
-| Offset  | Size   	| Value     	| Description 	|
-|:------: |:------:	|:-----------:|-------------	|
-|         | 6 bits	| 1111110101b | Preamble |
-|  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|            	| ?	|
-|  07   	| 1 byte	|           	| ?	|
-|  08   	| 1 byte	|          	  | ?	|
-|  09   	| 1 byte	|           	| Command	|
-|  0A   	| 1 byte	|           	| Number of parameters	|
-|  0B   	| 1 byte	|           	| Parameter 1	|
-|  0C   	| 1 byte	|           	| Parameter 2	|
-|  0D   	| 1 byte	|           	| Parameter 3	|
-|  0E   	| 1 byte	|         	  | Parameter 4	|
-|  0F   	| 1 byte	|           	| Parameter 5	|
-|  10   	| 1 byte	|           	| Parameter 6	|
-|  11   	| 1 byte	|           	| Parameter 7	|
-|  12   	| 1 byte	|           	| Parameter 8	|
-|  13   	| 1 byte	|           	| Parameter 9	|
-|  14-15 	| 16 bits |         	  | CRC	|
-
 ### Commands:
 
 #### Command 0x01: ???
