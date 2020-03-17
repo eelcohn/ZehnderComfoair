@@ -8,7 +8,7 @@
 * Frame size: 6 bit preamble + 22 bytes (the nRF905 adds 6 bytes to the payload: 4 rx address bytes and 2 CRC bytes)
 * nRF905 payload size: 16 bytes (from offset `0x04` to `0x13`)
 
-###Frame format:
+### Frame format:
 
 Frame format:
 
