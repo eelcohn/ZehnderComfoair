@@ -11,11 +11,13 @@
 ###Frame format:
 
 Frame format:
+
 | Preamble    | Network<br>Address | Rx<br>Type | Rx<br>ID | Tx<br>Type | Tx<br>ID | TTL | Command | Parameter count | Parameters | 16-bit CRC |
 |:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
 | 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
 
 * Transmitter and receiver types:
+
 | Value | Type               |
 |:-----:|:-------------------|
 | 0x01  | Main Unit          |
