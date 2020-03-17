@@ -9,78 +9,82 @@
 * nRF905 payload size: 16 bytes (from offset 0x04 to 0x13)
 * Frame format:
 
-| Offset  | Size   	| Value   	| Description 	|
-|:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101b | Preamble |
-|  00-03  | 4 bytes |           | Network address |
-|  04   	| 1 byte	|         	| ?	|
-|  05   	| 1 byte	|         	| ?	|
-|  06   	| 1 byte	|         	| ?	|
-|  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	|          	| ?	|
-|  09   	| 1 byte	|         	| Command	|
-|  0A   	| 1 byte	|         	| Number of parameters	|
-|  0B   	| 1 byte	|         	| Parameter 1	|
-|  0C   	| 1 byte	|         	| Parameter 2	|
-|  0D   	| 1 byte	|         	| Parameter 3	|
-|  0E   	| 1 byte	|         	| Parameter 4	|
-|  0F   	| 1 byte	|         	| Parameter 5	|
-|  10   	| 1 byte	|         	| Parameter 6	|
-|  11   	| 1 byte	|         	| Parameter 7	|
-|  12   	| 1 byte	|         	| Parameter 8	|
-|  13   	| 1 byte	|         	| Parameter 9	|
-|  14-15 	| 16 bits |         	| CRC	|
+| Preamble    | Network Address |  ?  |  ?  |  ?  |  ?  | Command | Parameter count | Parameters | 16-bit CRC |
+|:-----------:|:---------------:|:---:|:---:|:---:|:---:|---------|-----------------|------------|------------|
+| 10-bits 1111110101  | 4 bytes         |  ?  |  ?  |  ?  |  ?  | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
+
+| Offset  | Size   	| Value     	| Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|           	| ?	|
+|  05   	| 1 byte	|           	| ?	|
+|  06   	| 1 byte	|            	| ?	|
+|  07   	| 1 byte	|           	| ?	|
+|  08   	| 1 byte	|          	  | ?	|
+|  09   	| 1 byte	|           	| Command	|
+|  0A   	| 1 byte	|           	| Number of parameters	|
+|  0B   	| 1 byte	|           	| Parameter 1	|
+|  0C   	| 1 byte	|           	| Parameter 2	|
+|  0D   	| 1 byte	|           	| Parameter 3	|
+|  0E   	| 1 byte	|         	  | Parameter 4	|
+|  0F   	| 1 byte	|           	| Parameter 5	|
+|  10   	| 1 byte	|           	| Parameter 6	|
+|  11   	| 1 byte	|           	| Parameter 7	|
+|  12   	| 1 byte	|           	| Parameter 8	|
+|  13   	| 1 byte	|           	| Parameter 9	|
+|  14-15 	| 16 bits |         	  | CRC	|
 
 ### Commands:
 
 #### Command 0x01: ???
 
 #### Command 0x02: Set power
-| Offset  | Size   	| Value   	| Description 	|
-|:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101b | Preamble |
-|  00-03  | 4 bytes |           | Network address |
-|  04   	| 1 byte	|         	| ?	|
-|  05   	| 1 byte	|         	| ?	|
-|  06   	| 1 byte	|         	| ?	|
-|  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	| 0x??     	| ? |
-|  09   	| 1 byte	| 0x02     	| Command	|
-|  0A   	| 1 byte	| 0x01    	| Number of parameters	|
-|  0B   	| 1 byte	| power    	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
-|  0C   	| 1 byte	| 0x00    	| |
-|  0D   	| 1 byte	| 0x00    	| |
-|  0E   	| 1 byte	| 0x00    	| |
-|  0F   	| 1 byte	| 0x00    	| |
-|  10   	| 1 byte	| 0x00    	| |
-|  11   	| 1 byte	| 0x00    	| |
-|  12   	| 1 byte	| 0x00    	| |
-|  13   	| 1 byte	| 0x00    	| |
-|  14-15 	| 16 bits |         	| CRC	|
+| Offset  | Size   	| Value     	| Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|           	| ?	|
+|  05   	| 1 byte	|           	| ?	|
+|  06   	| 1 byte	|           	| ?	|
+|  07   	| 1 byte	|           	| ?	|
+|  08   	| 1 byte	| 0x??     	  | ? |
+|  09   	| 1 byte	| 0x02       	| Command	|
+|  0A   	| 1 byte	| 0x01      	| Number of parameters	|
+|  0B   	| 1 byte	| power      	| Power (0x01 = low, 0x02 = medium, 0x03 = high) |
+|  0C   	| 1 byte	| 0x00      	| |
+|  0D   	| 1 byte	| 0x00      	| |
+|  0E   	| 1 byte	| 0x00      	| |
+|  0F   	| 1 byte	| 0x00    	  | |
+|  10   	| 1 byte	| 0x00      	| |
+|  11   	| 1 byte	| 0x00      	| |
+|  12   	| 1 byte	| 0x00      	| |
+|  13   	| 1 byte	| 0x00    	  | |
+|  14-15 	| 16 bits |         	  | CRC	|
 
 #### Command 0x03: Set timer
 
-| Offset  | Size   	| Value   	| Description 	|
-|:------: |:------:	|:-------:	|-------------	|
-|         | 6 bits	| 11110101b | Preamble |
-|  00-03  | 4 bytes |           | Network address |
-|  04   	| 1 byte	|         	| ?	|
-|  05   	| 1 byte	|         	| ?	|
-|  06   	| 1 byte	|         	| ?	|
-|  07   	| 1 byte	|         	| ?	|
-|  08   	| 1 byte	| 0x??     	| ? |
-|  09   	| 1 byte	| 0x03     	| Command	|
-|  0A   	| 1 byte	| 0x02    	| Number of parameters	|
-|  0B   	| 1 byte	| 0x03     	| Power (always 0x03: high) |
-|  0C   	| 1 byte	| duration	| Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
-|  0D   	| 1 byte	| 0x00    	| |
-|  0E   	| 1 byte	| 0x00    	| |
-|  0F   	| 1 byte	| 0x00    	| |
-|  10   	| 1 byte	| 0x00    	| |
-|  11   	| 1 byte	| 0x00    	| |
-|  12   	| 1 byte	| 0x00    	| |
-|  13   	| 1 byte	| 0x00    	| |
-|  14-15 	| 16 bits |         	| CRC	|
+| Offset  | Size   	| Value     	| Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 6 bits	| 1111110101b | Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|           	| ?	|
+|  05   	| 1 byte	|           	| ?	|
+|  06   	| 1 byte	|           	| ?	|
+|  07   	| 1 byte	|           	| ?	|
+|  08   	| 1 byte	| 0x??       	| ? |
+|  09   	| 1 byte	| 0x03       	| Command	|
+|  0A   	| 1 byte	| 0x02      	| Number of parameters	|
+|  0B   	| 1 byte	| 0x03       	| Power (always 0x03: high) |
+|  0C   	| 1 byte	| duration	  | Duration (0x0A: 10 minutes, 0x1E: 30 minutes) |
+|  0D   	| 1 byte	| 0x00      	| |
+|  0E   	| 1 byte	| 0x00      	| |
+|  0F   	| 1 byte	| 0x00      	| |
+|  10   	| 1 byte	| 0x00    	  | |
+|  11   	| 1 byte	| 0x00      	| |
+|  12   	| 1 byte	| 0x00      	| |
+|  13   	| 1 byte	| 0x00      	| |
+|  14-15 	| 16 bits |         	  | CRC	|
 
 Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Duration is always 0x0A (10) or 0x1E (30), but this is probably customizable as well.
 
@@ -90,27 +94,27 @@ Power is always 0x03, but my guess is that 0x01 or 0x02 should work as well. Dur
 
 #### Command 0x06: Main unit is available for linking
 When the main unit is powered on it will be available for 10 minutes for linking to remote devices. During these 10 minutes the main unit will transmit the *0x05: Available for linking* frame every 420 ms.
-| Offset  | Size   	| Value   	  | Description 	|
-|:------: |:------:	|:----------: |-------------	|
-|         | 6 bits	| 11110101b   | Preamble |
-|  00-03  | 4 bytes | 0xA55AA55A  | Default network address for linking (always 0xA55AA55A) |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|         	  | ?	|
-|  08   	| 1 byte	| 0xFA       	| Always 0xFA	|
-|  09   	| 1 byte	| 0x06       	| Command	|
-|  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
-|  0B   	| 1 byte	|           	| Network address of main unit MSB |
-|  0C   	| 1 byte	|            	| Network address of main unit |
-|  0D   	| 1 byte	|           	| Network address of main unit |
-|  0E   	| 1 byte	|           	| Network address of main unit LSB |
-|  0F   	| 1 byte	| 0x00      	| |
-|  10   	| 1 byte	| 0x00    	  | |
-|  11   	| 1 byte	| 0x00     	  | |
-|  12   	| 1 byte	| 0x00      	| |
-|  13   	| 1 byte	| 0x00      	| |
-|  14-15 	| 16 bits |           	| CRC	|
+| Offset  | Size   	| Value   	    | Description 	|
+|:------: |:------:	|:-------------:|-------------	|
+|         | 6 bits	| 1111110101b   | Preamble |
+|  00-03  | 4 bytes | 0xA55AA55A    | Default network address for linking (always 0xA55AA55A) |
+|  04   	| 1 byte	|             	| ?	|
+|  05   	| 1 byte	|             	| ?	|
+|  06   	| 1 byte	|             	| ?	|
+|  07   	| 1 byte	|           	  | ?	|
+|  08   	| 1 byte	| 0xFA         	| Always 0xFA	|
+|  09   	| 1 byte	| 0x06         	| Command	|
+|  0A   	| 1 byte	| 0x04    	    | Number of parameters	|
+|  0B   	| 1 byte	|              	| Network address of main unit MSB |
+|  0C   	| 1 byte	|              	| Network address of main unit |
+|  0D   	| 1 byte	|             	| Network address of main unit |
+|  0E   	| 1 byte	|             	| Network address of main unit LSB |
+|  0F   	| 1 byte	| 0x00        	| |
+|  10   	| 1 byte	| 0x00      	  | |
+|  11   	| 1 byte	| 0x00       	  | |
+|  12   	| 1 byte	| 0x00         	| |
+|  13   	| 1 byte	| 0x00      	  | |
+|  14-15 	| 16 bits |              	| CRC	|
 
 #### Command 0x07: ???
 
@@ -118,24 +122,24 @@ When the main unit is powered on it will be available for 10 minutes for linking
 
 #### Command 0x0C: RFZ remote control unit is available for linking
 When you press the *Timer* button together with one of the other buttons, the RFZ will switch to linking mode. It will now transmit a *0x0C Available for linking* frame every 240ms or so.
-| Offset  | Size   	| Value   	  | Description 	|
-|:------: |:------:	|:----------: |-------------	|
-|         | 6 bits	| 11110101b   | Preamble |
-|  00-03  | 4 bytes | 0xA55AA55A  | Default network address for linking (always 0xA55AA55A) |
-|  04   	| 1 byte	|           	| ?	|
-|  05   	| 1 byte	|           	| ?	|
-|  06   	| 1 byte	|           	| ?	|
-|  07   	| 1 byte	|         	  | ?	|
-|  08   	| 1 byte	| 0xFA       	| Always 0xFA |
-|  09   	| 1 byte	| 0x0C       	| Command	|
-|  0A   	| 1 byte	| 0x04    	  | Number of parameters	|
-|  0B-0E	| 4 byte	| 0xA55AA55A	| Network address for linking |
-|  0F   	| 1 byte	| 0x00      	| |
-|  10   	| 1 byte	| 0x00    	  | |
-|  11   	| 1 byte	| 0x00     	  | |
-|  12   	| 1 byte	| 0x00      	| |
-|  13   	| 1 byte	| 0x00      	| |
-|  14-15 	| 16 bits |           	| CRC	|
+| Offset  | Size   	| Value   	    | Description 	|
+|:------: |:------:	|:-------------:|-------------	|
+|         | 6 bits	| 1111110101b   | Preamble |
+|  00-03  | 4 bytes |               | Network address (can either be the RFZ's currently linked network address or 0xA55AA55A) |
+|  04   	| 1 byte	|             	| ?	|
+|  05   	| 1 byte	|             	| ?	|
+|  06   	| 1 byte	|             	| ?	|
+|  07   	| 1 byte	|           	  | ?	|
+|  08   	| 1 byte	| 0xFA         	| Always 0xFA |
+|  09   	| 1 byte	| 0x0C         	| Command	|
+|  0A   	| 1 byte	| 0x04      	  | Number of parameters	|
+|  0B-0E	| 4 byte	| 0xA55AA55A  	| Network address for linking |
+|  0F   	| 1 byte	| 0x00        	| |
+|  10   	| 1 byte	| 0x00      	  | |
+|  11   	| 1 byte	| 0x00     	    | |
+|  12   	| 1 byte	| 0x00        	| |
+|  13   	| 1 byte	| 0x00        	| |
+|  14-15 	| 16 bits |             	| CRC	|
 
 #### Command 0x0D: ???
 
