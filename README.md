@@ -91,6 +91,7 @@ To do.
 |  12   	| 1 byte	| 0x00         	| |
 |  13   	| 1 byte	| 0x00      	  | |
 |  14-15 	| 2 bytes |              	| 16-bit CRC	|
+
 Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network address at `0x00-0x03`. This frame is only sent by the RFZ during the linking sequence.
 
 #### Command 0x05: ???
@@ -116,6 +117,7 @@ To do.
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00    	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+
 Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
 ```
 0x49, 0x02, 0x20
@@ -177,6 +179,7 @@ To do.
 |  12   	| 1 byte	| 0x00      	| |
 |  13   	| 1 byte	| 0x00    	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+
 Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
 ```
 0x01, 0x1E, 0x00, 0x05
