@@ -18,26 +18,26 @@
 
 | Value | Type               |
 |:-----:|:-------------------|
-| 0x01  | Main Unit          |
-| 0x03  | RFZ remote control |
+|`0x01` | Main Unit          |
+|`0x03` | RFZ remote control |
 
 ##### Commands:
 
 | Value | Command                         |
 |:-----:|:--------------------------------|
-| 0x01  | ?                               |
-| 0x02  | Set power                       |
-| 0x03  | Set timer                       |
-| 0x04  | ?                               |
-| 0x05  | ?                               |
-| 0x06  | Main unit available for linking |
-| 0x07  | Reply to set power or timer     |
-| 0x08  | ?                               |
-| 0x09  | ?                               |
-| 0x0A  | ?                               |
-| 0x0B  | Linking successful              |
-| 0x0C  | RFZ available for linking       |
-| 0x0D  | ?                               |
+|`0x01` | ?                               |
+|`0x02` | Set power                       |
+|`0x03` | Set timer                       |
+|`0x04` | ?                               |
+|`0x05` | ?                               |
+|`0x06` | Main unit available for linking |
+|`0x07` | Reply to set power or timer     |
+|`0x08` | ?                               |
+|`0x09` | ?                               |
+|`0x0A` | ?                               |
+|`0x0B` | Linking successful              |
+|`0x0C` | RFZ available for linking       |
+|`0x0D` | ?                               |
 
 ### Commands:
 
@@ -55,7 +55,7 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	| 0x02       	| Command:<br>0x02: Set power	|
+|  09   	| 1 byte	| 0x02       	| Command:<br>`0x02`: Set power	|
 |  0A   	| 1 byte	| 0x01      	| Number of parameters:<br>1 parameter	|
 |  0B   	| 1 byte	| power      	| Power:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
 |  0C   	| 1 byte	| 0x00      	| |
@@ -79,7 +79,7 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	| 0x03       	| Command:<br>0x03: Set timer	|
+|  09   	| 1 byte	| 0x03       	| Command:<br>`0x03`: Set timer	|
 |  0A   	| 1 byte	| 0x02      	| Number of parameters:<br>2 parameters 	|
 |  0B   	| 1 byte	| 0x03       	| Power:<br>Always `0x03`: high |
 |  0C   	| 1 byte	| duration	  | Duration:<br>`0x0A`: 10 minutes<br>`0x1E`: 30 minutes |
@@ -105,7 +105,7 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	| 0x04       	| Command:<br>0x04: ?????	|
+|  09   	| 1 byte	| 0x04       	| Command:<br>`0x04`: ?????	|
 |  0A   	| 1 byte	| 0x04    	  | Number of parameters:<br>4 parameters|
 |  0B   	| 1 byte	|            	| Network address of main unit MSB |
 |  0C   	| 1 byte	|            	| Network address of main unit |
@@ -131,7 +131,7 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	| 0x05       	| Command:<br>0x05: ???	|
+|  09   	| 1 byte	| 0x05       	| Command:<br>`0x05`: ???	|
 |  0A   	| 1 byte	| 0x03      	| Number of parameters:<br>3 parameters |
 |  0B   	| 1 byte	| ????      	| ????? |
 |  0C   	| 1 byte	| ????      	| ????? |
@@ -169,7 +169,7 @@ When the main unit is powered on it will be available for 10 minutes for linking
 |  06   	| 1 byte	|            	| Transmitter Type	|
 |  07   	| 1 byte	|          	  | Transmitter ID |
 |  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	| 0x06       	| Command:<br>0x06: Main unit available for linking	|
+|  09   	| 1 byte	| 0x06       	| Command:<br>`0x06`: Main unit available for linking	|
 |  0A   	| 1 byte	| 0x04   	    | Number of parameters:<br>4 parameters|
 |  0B   	| 1 byte	|            	| Network address of main unit MSB |
 |  0C   	| 1 byte	|            	| Network address of main unit |
@@ -195,10 +195,10 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	| 0x07       	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	| 0x04      	| Number of parameters:<br>4 parameters	|
-|  0B   	| 1 byte	| Power      	| Power (same as in command 0x02 / 0x03)<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
+|  0B   	| 1 byte	| Power      	| Power (same as in command `0x02`/`0x03`)<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
 |  0C   	| 1 byte	| ????      	| ????? (% Power?) |
 |  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: Reply to `0x02`: Set Power<br>`0x01`: Reply to `0x03`: Set Timer |
-|  0E   	| 1 byte	| ????      	| ????? (Next command = 0x05?) |
+|  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
 |  0F   	| 1 byte	| 0x00    	  | |
 |  10   	| 1 byte	| 0x00      	| |
 |  11   	| 1 byte	| 0x00      	| |
