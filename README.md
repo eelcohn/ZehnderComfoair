@@ -18,8 +18,11 @@
 
 | Value | Type               |
 |:-----:|:-------------------|
+|`0x00` | ??? Broadcast?     |
 |`0x01` | Main Unit          |
 |`0x03` | RFZ remote control |
+|`0x04` | ???                |
+|`0x1C` |                    |
 
 ##### Commands:
 
