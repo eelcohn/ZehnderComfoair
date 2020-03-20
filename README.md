@@ -31,7 +31,7 @@
 | 0x04  | ?                               |
 | 0x05  | ?                               |
 | 0x06  | Main unit available for linking |
-| 0x07  | ?                               |
+| 0x07  | Reply to set power or timer     |
 | 0x08  | ?                               |
 | 0x09  | ?                               |
 | 0x0A  | ?                               |
@@ -182,7 +182,7 @@ When the main unit is powered on it will be available for 10 minutes for linking
 |  13   	| 1 byte	| 0x00     	  | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
-#### Command 0x07: ???
+#### Command 0x07: Reply/acknowledge to 0x02 (Set Power) and 0x03 (Set Timer)
 To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
@@ -193,12 +193,12 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	| 0x07       	| Command:<br>0x07: ???	|
+|  09   	| 1 byte	| 0x07       	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	| 0x04      	| Number of parameters:<br>4 parameters	|
-|  0B   	| 1 byte	| ????      	| ????? |
-|  0C   	| 1 byte	| ????      	| ????? |
-|  0D   	| 1 byte	| ????      	| ????? |
-|  0E   	| 1 byte	| ????      	| ????? |
+|  0B   	| 1 byte	| Power      	| Power (same as in command 0x02 / 0x03)<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
+|  0C   	| 1 byte	| ????      	| ????? (% Power?) |
+|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: Reply to `0x02`: Set Power<br>`0x01`: Reply to `0x03`: Set Timer |
+|  0E   	| 1 byte	| ????      	| ????? (Next command = 0x05?) |
 |  0F   	| 1 byte	| 0x00    	  | |
 |  10   	| 1 byte	| 0x00      	| |
 |  11   	| 1 byte	| 0x00      	| |
@@ -234,7 +234,7 @@ This package is sent to acknowledge that a device has been successfully linked. 
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	| 0x0B       	| Command:<br>0x0B: Linking successful	|
+|  09   	| 1 byte	| 0x0B       	| Command:<br>`0x0B`: Linking successful	|
 |  0A   	| 1 byte	| 0x00    	  | Number of parameters:<br>no parameters|
 |  0B   	| 1 byte	| 0x00       	| |
 |  0C   	| 1 byte	| 0x00       	| |
@@ -258,7 +258,7 @@ When you press the *Timer* button together with one of the other buttons on the 
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	| 0x0C       	| Command:<br>0x0C: RFZ available for linking	|
+|  09   	| 1 byte	| 0x0C       	| Command:<br>`0x0C`: RFZ available for linking	|
 |  0A   	| 1 byte	| 0x04        | Number of parameters:<br>4 parameters	|
 |  0B-0E	| 4 byte	| 0xA55AA55A 	| Network address for linking |
 |  0F   	| 1 byte	| 0x00       	| |
@@ -279,7 +279,7 @@ To do.
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	| 0xFA        | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	| 0x0D       	| Command:<br>0x0D: ?????	|
+|  09   	| 1 byte	| 0x0D       	| Command:<br>`0x0D`: ?????	|
 |  0A   	| 1 byte	| 0x00    	  | Number of parameters:<br>0 parameters|
 |  0B   	| 1 byte	| 0x00       	| |
 |  0C   	| 1 byte	| 0x00       	| |
