@@ -1,0 +1,10 @@
+$ ./minipro -i -p PIC16F913 -r test.bin
+Found TL866A 03.2.69 (0x245)
+Warning: Firmware is out of date.
+  Expected  03.2.86 (0x256)
+  Found     03.2.69 (0x245)
+Activating ICSP...
+Chip ID OK: 0x009F Rev.0x02
+Reading Code...  0.91Sec  OK
+Reading Data...  0.05Sec  OK
+Reading fuses... 0.11Sec  OK
