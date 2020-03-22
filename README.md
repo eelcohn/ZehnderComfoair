@@ -1,46 +1,6 @@
 # Reverse engineering the Zehnder / ComfoAir ventilation remote control
 
-### RF protocol:
-* Frequency: 868440000 Hz
-* Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
-* Bitrate: 100kbps (nRF905 default)
-* Encoding: Manchester 1 (nRF905 default)
-* Frame size: 6 bit preamble + 22 bytes (the nRF905 adds 6 bytes to the payload: 4 rx address bytes and 2 CRC bytes)
-* nRF905 payload size: 16 bytes (from offset `0x04` to `0x13`)
-
-### Frame format:
-
-| Preamble    | Network<br>Address | Rx<br>Type | Rx<br>ID | Tx<br>Type | Tx<br>ID | TTL | Command | Parameter count | Parameters | 16-bit CRC |
-|:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
-| 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
-
-##### Transmitter and receiver types:
-
-| Value | Type               |
-|:-----:|:-------------------|
-|`0x00` | ??? Broadcast?     |
-|`0x01` | Main Unit          |
-|`0x03` | RFZ remote control |
-|`0x04` | ???                |
-|`0x1C` |                    |
-
-##### Commands:
-
-| Value | Command                         |
-|:-----:|:--------------------------------|
-|`0x01` | ?                               |
-|`0x02` | Set power                       |
-|`0x03` | Set timer                       |
-|`0x04` | ?                               |
-|`0x05` | ?                               |
-|`0x06` | Main unit available for linking |
-|`0x07` | Reply to set power or timer     |
-|`0x08` | ?                               |
-|`0x09` | ?                               |
-|`0x0A` | ?                               |
-|`0x0B` | Linking successful              |
-|`0x0C` | RFZ available for linking       |
-|`0x0D` | ?                               |
+Looking for background info about this project? Check out the [Wiki](https://github.com/eelcohn/ZehnderComfoair/wiki)!
 
 ### Commands:
 
@@ -294,25 +254,6 @@ To do.
 |  12   	| 1 byte	|`0x00`      	| |
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
-
-### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
-1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
-2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
-3. Start URH
-4. Go to *File* -> *New Project* and create a new project. And adjust the settings as shown below.
-![Universal Radio Hacker - New Project](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/URH-NewProject.png)
-5. Go to *File* -> *Spectrum Analyzer* and adjust the settings as shown below.
-![Universal Radio Hacker - Spectrum Analyzer](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/URH-SpectrumAnalyzer.png)
-6. Click *Start* and press a button on the Zehnder ZRF remote control. You should see a couple of pulses in the spectrum analyzer
-7. Close the Spectrum Analyzer and open the recorder with *File* -> *Record Signal*. And adjust the settings as shown below.
-![Universal Radio Hacker - Record Signal](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/URH-Recorder.png)
-8. Make a separate recording of each of the buttons on your remote control
-9. Open a signal and click *Autodetect parameters*. *Samples/Symbols* should be 10 if you recorded with a sample rate of 1M (1 million samples per second at a bitrate of 100,000 bits per second makes 10 samples per bit)
-![Universal Radio Hacker - Interpretation](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/URH-Interpretation.png)
-10. Go to the *Analysis* tab and select *Manchester I* as decoding method
-![Universal Radio Hacker - Analysis](https://github.com/eelcohn/ZehnderComfoair/blob/master/images/URH-Analysis.png)
-11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
-12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
 ### Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
