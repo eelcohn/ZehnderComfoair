@@ -95,7 +95,7 @@ To do.
 |  13   	| 1 byte	|`0x00`     	| |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-Power is always `0x03`, but my guess is that `0x01` or `0x02` should work as well. Duration is always `0x0A` (10) or `0x1E` (30), but this is probably customizable as well.
+For the official RF remote control the power is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
 
 #### Command 0x04: ???
 To do.
