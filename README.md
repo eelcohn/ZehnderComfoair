@@ -22,13 +22,16 @@
 |`0x01` | Main Unit          |
 |`0x03` | RFZ remote control |
 |`0x04` | ???                |
+|`0x16` | Timer RF remote    |
+|`0x18` | CO2 remote         |
+|`0x19` | CO2 slave monitor? |
 |`0x1C` |                    |
 
 ##### Commands:
 
 | Value | Command                         |
 |:-----:|:--------------------------------|
-|`0x01` | ?                               |
+|`0x01` | Command from CO2 remote         |
 |`0x02` | Set power                       |
 |`0x03` | Set timer                       |
 |`0x04` | ?                               |
@@ -41,11 +44,34 @@
 |`0x0B` | Linking successful              |
 |`0x0C` | RFZ available for linking       |
 |`0x0D` | ?                               |
+|`0x1D` | Broadcast last known settings?  |
 
 ### Commands:
 
-#### Command 0x01: ???
-I haven't captured any frames of this type yet.
+#### Command 0x01: CO2 remote command?
+| Offset  | Size   	| Value     	| Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 10 bits |`1111110101b`| Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|           	| Receiver Type	|
+|  05   	| 1 byte	|           	| Receiver ID	|
+|  06   	| 1 byte	|           	| Transmitter Type |
+|  07   	| 1 byte	|           	| Transmitter ID |
+|  08   	| 1 byte	|             | Time-To-Live |
+|  09   	| 1 byte	|`0x01`      	| Command:<br>`0x01`: CO2 command	|
+|  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
+|  0B   	| 1 byte	| power      	| Power:<br>`0x00`: afwezig<br>`0x32`: aanwezig<br>`0x64`: max |
+|  0C   	| 1 byte	|`0x00`     	| |
+|  0D   	| 1 byte	|`0x00`     	| |
+|  0E   	| 1 byte	|`0x00`     	| |
+|  0F   	| 1 byte	|`0x00`   	  | |
+|  10   	| 1 byte	|`0x00`     	| |
+|  11   	| 1 byte	|`0x00`     	| |
+|  12   	| 1 byte	|`0x00`     	| |
+|  13   	| 1 byte	|`0x00`   	  | |
+|  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+
+Value at offset 0B seems to range from 0x00 - 0x64. Might indicate the CO2 control can control the main unit with any power value when in "Automatic" position?
 
 #### Command 0x02: Set power
 To do.
@@ -77,15 +103,15 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| Receiver Type |
-|  05   	| 1 byte	|           	| Receiver ID |
+|  04   	| 1 byte	|`0x01`     	| Receiver Type: Always the main unit |
+|  05   	| 1 byte	|`0x00`     	| Receiver ID: Always 0x00 like it is a broadcast to to any main unit |
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x03`      	| Command:<br>`0x03`: Set timer	|
 |  0A   	| 1 byte	|`0x02`     	| Number of parameters:<br>2 parameters 	|
-|  0B   	| 1 byte	|`0x03`      	| Power:<br>Always `0x03`: high |
-|  0C   	| 1 byte	| duration	  | Duration:<br>`0x0A`: 10 minutes<br>`0x1E`: 30 minutes |
+|  0B   	| 1 byte	|`0x03`      	| Power:<br>`0x01`: low<br>`0x03`: high<br>`0x04`: max (from timer rf) |
+|  0C   	| 1 byte	| duration	  | Duration:<br>`0x00`: Reset timer<br>`0x0A`: 10 minutes<br>`0x1E`: 30 minutes<br>`0x3C`: 60 minuten |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
 |  0F   	| 1 byte	|`0x00`     	| |
@@ -95,7 +121,8 @@ To do.
 |  13   	| 1 byte	|`0x00`     	| |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-For the official RF remote control the power is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
+For the official RF remote control the power is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
+Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
 
 #### Command 0x04: ???
 To do.
@@ -294,6 +321,31 @@ To do.
 |  12   	| 1 byte	|`0x00`      	| |
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
+
+#### Command 0x1D: Last know configuration?
+To do.
+| Offset  | Size   	| Value   	  | Description 	|
+|:------: |:------:	|:-----------:|-------------	|
+|         | 10 bits |`1111110101b`| Preamble |
+|  00-03  | 4 bytes |             | Network address |
+|  04   	| 1 byte	|`0x00`       | Receiver Type: broadcast |
+|  05   	| 1 byte	|`0x00`       | Receiver ID: broadcast	|
+|  06   	| 1 byte	|            	| Transmitter Type |
+|  07   	| 1 byte	|             | Transmitter ID |
+|  08   	| 1 byte	|       | Time-To-Live |
+|  09   	| 1 byte	|`0x1D`      	| Command:<br>`0x1D`: Last known configuration?	|
+|  0A   	| 1 byte	|`0x03`   	  | Number of parameters:<br>3 parameters|
+|  0B   	| 1 byte	|`0x76`      	| `0x76`: Power setting |
+|  0C   	| 1 byte	|      	| Last power settings transmitted by this Transmitter to main unit |
+|  0D   	| 1 byte	|`0x28`     	| `0x28`: Always this value. Did not observe any other value. |
+|  0E   	| 1 byte	|`0x00`      	| |
+|  0F   	| 1 byte	|`0x00`      	| |
+|  10   	| 1 byte	|`0x00`       | |
+|  11   	| 1 byte	|`0x00`       | |
+|  12   	| 1 byte	|`0x00`      	| |
+|  13   	| 1 byte	|`0x00`       | |
+|  14-15 	| 2 bytes |            	| 16-bit CRC	|
+
 
 ### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
