@@ -348,7 +348,7 @@ To do.
 
 
 ### Analyzing RF signal with a RTL-SDR
-##### rtl_433
+#### rtl_433
 1. Install [rtl_433](https://github.com/merbanan/rtl_433)
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start rtl_433 using the following command:
@@ -357,7 +357,7 @@ rtl_433 -f 868400000 -g 10000 -S known -R 0 -X n=zehnder,m=FSK_MC_ZEROBIT,s=10,r
 ```
 The readable data will be written to the `Zehnder-log.csv` file.
 
-##### Universal Radio Hacker
+#### Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start URH
