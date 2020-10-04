@@ -227,7 +227,7 @@ To do.
 |  0A   	| 1 byte	|`0x04`     	| Number of parameters:<br>4 parameters	|
 |  0B   	| 1 byte	| Power      	| Power (same as in command `0x02`/`0x03`)<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high |
 |  0C   	| 1 byte	| ????      	| ????? (% Power?) |
-|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: Reply to `0x02`: Set Power<br>`0x01`: Reply to `0x03`: Set Timer |
+|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: Reply to `0x02`: Set Power<br>`0x01`: Reply to `0x03`: Set Timer<br>`0x02`: ??? |
 |  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
 |  0F   	| 1 byte	|`0x00`   	  | |
 |  10   	| 1 byte	|`0x00`     	| |
@@ -242,6 +242,7 @@ Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
 0x02, 0x32, 0x00, 0x05
 0x03, 0x5A, 0x00, 0x05
 0x03, 0x5A, 0x01, 0x05
+0x03, 0x5A, 0x02, 0x03 (in reply to 0x02 (power) 0x01 (params) 0x03 (power)
 ```
 
 #### Command 0x08: ???
