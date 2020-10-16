@@ -44,6 +44,7 @@
 |`0x0B` | Linking successful              |
 |`0x0C` | RFZ available for linking       |
 |`0x0D` | ?                               |
+|`0x10` | Query device                    |
 |`0x1D` | Broadcast last known settings?  |
 
 ### Commands:
