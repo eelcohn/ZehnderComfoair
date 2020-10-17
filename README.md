@@ -61,7 +61,7 @@
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x01`      	| Command:<br>`0x01`: Set voltage	|
 |  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
-|  0B   	| 1 byte	| power      	| Power:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
+|  0B   	| 1 byte	| Voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
 |  0C   	| 1 byte	|`0x00`     	| |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
@@ -74,7 +74,7 @@
 
 Value at offset 0B is in the range from 0x00 - 0x64, which is 000 - 100 decimal.
 
-#### Command 0x02: Set power preset
+#### Command 0x02: Set power
 To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
@@ -85,9 +85,9 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	|`0x02`      	| Command:<br>`0x02`: Set power preset	|
+|  09   	| 1 byte	|`0x02`       | Command:<br>`0x02`: Set power |
 |  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
-|  0B   	| 1 byte	| power      	| Preset:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0B   	| 1 byte	| Power      	| Power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	|`0x00`     	| |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
@@ -226,9 +226,9 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x07`      	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	|`0x04`     	| Number of parameters:<br>4 parameters	|
-|  0B   	| 1 byte	| Power      	| Power setting (same as in command `0x02`/`0x03`)<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
-|  0C   	| 1 byte	| Voltage   	| Fan voltage |
-|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: Reply to `0x02`: Set Power<br>`0x01`: Reply to `0x03`: Set Timer<br>`0x02`: ??? |
+|  0B   	| 1 byte	| Power      	| Current power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0C   	| 1 byte	| Voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
+|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set Power)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
 |  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
 |  0F   	| 1 byte	|`0x00`   	  | |
 |  10   	| 1 byte	|`0x00`     	| |
