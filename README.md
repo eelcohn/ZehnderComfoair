@@ -72,7 +72,7 @@
 |  13   	| 1 byte	|`0x00`   	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-Value at offset 0B is in the range from 0x00 - 0x7F, which is 000 - 127 decimal, and represents 0.0V to 12.7V. The maximum output voltage to the fan seems to be 10.5V, so all values from 106 to 127 result in an output voltage of 10.5V. Values from 0x80 to 0xFF (128 - 255 decimal) result in the same values from 0x00-0x7F. The MSB bit 7 therefore seems to be ignored.
+Voltage at offset 0B is in the range from 0x00 - 0x7F, which is 000 - 127 decimal, and represents 0.0V to 12.7V. The maximum output voltage to the fan seems to be 10.5V, so all values from 106 to 127 result in an output voltage of 10.5V. Values from 0x80 to 0xFF (128 - 255 decimal) result in the same values from 0x00-0x7F. The MSB bit 7 therefore seems to be ignored.
 
 #### Command 0x02: Set power
 To do.
