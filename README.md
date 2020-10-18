@@ -72,7 +72,7 @@
 |  13   	| 1 byte	|`0x00`   	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-Value at offset 0B is in the range from 0x00 - 0x64, which is 000 - 100 decimal.
+Value at offset 0B is in the range from 0x00 - 0x7F, which is 000 - 127 decimal, and represents 0.0V to 12.7V. The maximum output voltage to the fan seems to be 10.5V, so all values from 106 to 127 result in an output voltage of 10.5V. Values from 0x80 to 0xFF (128 - 255 decimal) result in the same values from 0x00-0x7F. The MSB bit 7 therefore seems to be ignored.
 
 #### Command 0x02: Set power
 To do.
@@ -182,6 +182,7 @@ Values seen for parameter 1-3 (`0x0B`-`0x0D`) are:<br>
 0x4B, 0x02, 0x20
 0x4C, 0x02, 0x20
 0x4D, 0x02, 0x20
+0x51, 0x03, 0x20
 0x54, 0x03, 0x20
 0x57, 0x03, 0x20
 0x5C, 0x03, 0x20
@@ -362,7 +363,7 @@ To do.
 |  09   	| 1 byte	|`0x1D`      	| Command:<br>`0x1D`: Last known configuration?	|
 |  0A   	| 1 byte	|`0x03`   	  | Number of parameters:<br>3 parameters|
 |  0B   	| 1 byte	|`0x76`      	| `0x76`: Power setting |
-|  0C   	| 1 byte	|      	| Last power settings transmitted by this Transmitter to main unit |
+|  0C   	| 1 byte	| Voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
 |  0D   	| 1 byte	|`0x28`     	| `0x28`: Always this value. Did not observe any other value. |
 |  0E   	| 1 byte	|`0x00`      	| |
 |  0F   	| 1 byte	|`0x00`      	| |
