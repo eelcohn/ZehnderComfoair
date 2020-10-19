@@ -35,9 +35,9 @@
 |`0x02` | Set power                       |
 |`0x03` | Set timer                       |
 |`0x04` | ?                               |
-|`0x05` | ?                               |
+|`0x05` | Reply to set power or timer ?   |
 |`0x06` | Main unit available for linking |
-|`0x07` | Reply to set power or timer     |
+|`0x07` | Current fan settings            |
 |`0x08` | ?                               |
 |`0x09` | ?                               |
 |`0x0A` | ?                               |
@@ -45,7 +45,7 @@
 |`0x0C` | RFZ available for linking       |
 |`0x0D` | ?                               |
 |`0x10` | Query device                    |
-|`0x1D` | Broadcast last known settings?  |
+|`0x1D` | Reply to set voltage ?          |
 
 ### Commands:
 
