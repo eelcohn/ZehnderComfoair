@@ -1,4 +1,4 @@
-# Reverse engineering the Zehnder / ComfoAir ventilation remote control
+# Reverse engineering the ComfoFan ventilation RF-protocol
 
 ### RF protocol:
 * Frequency: 868440000 Hz
