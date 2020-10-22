@@ -1,5 +1,7 @@
 # Reverse engineering the ComfoFan ventilation RF-protocol
 
+ComfoFan is a house ventilation model sold under several brands like Zehnder, StorkAir, BUVA and others.
+
 ### RF protocol:
 * Frequency: 868440000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
@@ -34,17 +36,14 @@
 |`0x01` | Set voltage                     |
 |`0x02` | Set power                       |
 |`0x03` | Set timer                       |
-|`0x04` | ?                               |
-|`0x05` | Reply to set power or timer ?   |
+|`0x04` | Current network address ?       |
+|`0x05` | Reply to set power / timer ?    |
 |`0x06` | Main unit available for linking |
 |`0x07` | Current fan settings            |
-|`0x08` | ?                               |
-|`0x09` | ?                               |
-|`0x0A` | ?                               |
 |`0x0B` | Linking successful              |
 |`0x0C` | RFZ available for linking       |
-|`0x0D` | ?                               |
-|`0x10` | Query device                    |
+|`0x0D` | Query device with broadcast ?   |
+|`0x10` | Query device ?                  |
 |`0x1D` | Reply to set voltage ?          |
 
 ### Commands:
@@ -74,7 +73,7 @@
 
 Voltage at offset 0B is in the range from 0x00 - 0x7F, which is 000 - 127 decimal, and represents 0.0V to 12.7V. The maximum output voltage to the fan seems to be 10.5V, so all values from 106 to 127 result in an output voltage of 10.5V. Values from 0x80 to 0xFF (128 - 255 decimal) result in the same values from 0x00-0x7F. The MSB bit 7 therefore seems to be ignored.
 
-#### Command 0x02: Set power
+#### Command 0x02: Set speed
 To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
@@ -87,7 +86,7 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x02`       | Command:<br>`0x02`: Set power |
 |  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
-|  0B   	| 1 byte	| Power      	| Power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0B   	| 1 byte	| speed      	| Fan speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	|`0x00`     	| |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
@@ -111,7 +110,7 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x03`      	| Command:<br>`0x03`: Set timer	|
 |  0A   	| 1 byte	|`0x02`     	| Number of parameters:<br>2 parameters 	|
-|  0B   	| 1 byte	| power      	| Preset:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0B   	| 1 byte	| speed      	| Fan speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	| duration	  | Duration:<br>`0x00`: Reset timer<br>`0x0A`: 10 minutes<br>`0x1E`: 30 minutes<br>`0x3C`: 60 minuten |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
@@ -125,7 +124,7 @@ To do.
 For the official RF remote control the power is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
 Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
 
-#### Command 0x04: ???
+#### Command 0x04: Current network address ?
 To do.
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:-----------:|-------------	|
@@ -229,9 +228,9 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x07`      	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	|`0x04`     	| Number of parameters:<br>4 parameters	|
-|  0B   	| 1 byte	| Power      	| Current power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
-|  0C   	| 1 byte	| Voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
-|  0D   	| 1 byte	| TimerFlag  	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set Power)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
+|  0B   	| 1 byte	| speed      	| Current power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0C   	| 1 byte	| voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
+|  0D   	| 1 byte	| flags     	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set Power)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
 |  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
 |  0F   	| 1 byte	|`0x00`   	  | |
 |  10   	| 1 byte	|`0x00`     	| |
@@ -246,7 +245,7 @@ Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
 0x02, 0x32, 0x00, 0x05
 0x03, 0x5A, 0x00, 0x05
 0x03, 0x5A, 0x01, 0x05
-0x03, 0x5A, 0x02, 0x03 (in reply to 0x02 (power) 0x01 (params) 0x03 (power)
+0x03, 0x5A, 0x02, 0x03 (in reply to 0x02 (speed) 0x01 (params) 0x03 (speed)
 ```
 
 #### Command 0x08: ???
@@ -351,7 +350,7 @@ Query device (fan) for last known settings. The fan unit will reply with `0x07`
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
-#### Command 0x1D: Last know configuration?
+#### Command 0x1D: Reply to set voltage ?
 To do.
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:-----------:|-------------	|
@@ -361,11 +360,11 @@ To do.
 |  05   	| 1 byte	|`0x00`       | Receiver ID: broadcast	|
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
-|  08   	| 1 byte	|       | Time-To-Live |
+|  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x1D`      	| Command:<br>`0x1D`: Last known configuration?	|
 |  0A   	| 1 byte	|`0x03`   	  | Number of parameters:<br>3 parameters|
-|  0B   	| 1 byte	|`0x76`      	| `0x76`: Power setting |
-|  0C   	| 1 byte	| Voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
+|  0B   	| 1 byte	|`0x76`      	| `0x76`: Always this value??? (is 118 dec.) |
+|  0C   	| 1 byte	| voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
 |  0D   	| 1 byte	|`0x28`     	| `0x28`: Always this value. Did not observe any other value. |
 |  0E   	| 1 byte	|`0x00`      	| |
 |  0F   	| 1 byte	|`0x00`      	| |
@@ -375,6 +374,14 @@ To do.
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
+## Capturing and analyzing RF signals
+There are currently 3 known methods for capturing and analyzing RF signals from your ComfoFan system:
+1. Use the [nRF905-API](https://github.com/eelcohn/nRF905-API/)
+2. With rtl_433 and a RTL-SDR
+3. With URH and a RTL-SDR
+
+### Analyzing RF signal with nRF905-API
+See the [nRF905-API](https://github.com/eelcohn/nRF905-API/) page for building/installing. Use the `/api/v1/receive.json` API endpoint to capture data.
 
 ### Analyzing RF signal with a RTL-SDR and rtl_433
 1. Install [rtl_433](https://github.com/merbanan/rtl_433)
