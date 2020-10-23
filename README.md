@@ -18,16 +18,16 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 
 ##### Transmitter and receiver types:
 
-| Value | Type               |
-|:-----:|:-------------------|
-|`0x00` | Broadcast ?        |
-|`0x01` | Main Unit          |
-|`0x03` | RFZ remote control |
-|`0x04` | ???                |
-|`0x16` | Timer RF remote    |
-|`0x18` | CO2 RF sensor      |
-|`0x19` | CO2 slave monitor? |
-|`0x1C` |                    |
+| Value | Type                    |
+|:-----:|:------------------------|
+|`0x00` | Broadcast ?             |
+|`0x01` | Main Unit               |
+|`0x03` | RFZ remote control      |
+|`0x04` | ???                     |
+|`0x16` | Timer RF remote control |
+|`0x18` | CO2 RF sensor           |
+|`0x19` | CO2 slave monitor?      |
+|`0x1C` |                         |
 
 ##### Commands:
 
