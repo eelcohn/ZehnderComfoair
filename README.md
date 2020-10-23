@@ -34,10 +34,10 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 | Value | Command                         |
 |:-----:|:--------------------------------|
 |`0x01` | Set voltage                     |
-|`0x02` | Set power                       |
+|`0x02` | Set speed                       |
 |`0x03` | Set timer                       |
 |`0x04` | Current network address ?       |
-|`0x05` | Reply to set power / timer ?    |
+|`0x05` | Reply to set speed / timer ?    |
 |`0x06` | Main unit available for linking |
 |`0x07` | Current fan settings            |
 |`0x0B` | Linking successful              |
@@ -84,7 +84,7 @@ To do.
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
-|  09   	| 1 byte	|`0x02`       | Command:<br>`0x02`: Set power |
+|  09   	| 1 byte	|`0x02`       | Command:<br>`0x02`: Set speed |
 |  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
 |  0B   	| 1 byte	| speed      	| Fan speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	|`0x00`     	| |
@@ -121,7 +121,7 @@ To do.
 |  13   	| 1 byte	|`0x00`     	| |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-For the official RF remote control the power is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
+For the official RF remote control the speed is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
 Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
 
 #### Command 0x04: Current network address ?
@@ -228,9 +228,9 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x07`      	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	|`0x04`     	| Number of parameters:<br>4 parameters	|
-|  0B   	| 1 byte	| speed      	| Current power setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
+|  0B   	| 1 byte	| speed      	| Current speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	| voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
-|  0D   	| 1 byte	| flags     	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set Power)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
+|  0D   	| 1 byte	| flags     	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set speed)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
 |  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
 |  0F   	| 1 byte	|`0x00`   	  | |
 |  10   	| 1 byte	|`0x00`     	| |
