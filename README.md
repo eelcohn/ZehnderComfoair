@@ -249,7 +249,7 @@ bit 5: ???<br>
 bit 6: ???<br>
 bit 7: ???<br>
 
-Parameter 4 at offset `0x0E` seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are:<br>
+Parameter 4 at offset `0x0E` is still unknown. It seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are:<br>
 `0x03`: ?<br>
 `0x05`: seen on Comfofan CFMe R<br>
 `0x06`: ?<br>
@@ -381,7 +381,7 @@ To do.
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 Parameter 1 at offset `0x0B` is still unknown. Values seen: `0x05`, `0x11`, `0x76`
-Parameter 3 at offset `0x0D` seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are: `0x00`, `0x28`, `0x2E`, `0x4E`, `0x51`, `0x52`, `0x54`, `0x55`, `0x56`, `0x57`<br>
+Parameter 3 at offset `0x0D` is still unknown. It seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are: `0x00`, `0x28`, `0x2C`, `0x2E`, `0x4E`, `0x51`, `0x52`, `0x54`, `0x55`, `0x56`, `0x57`<br>
 
 ## Capturing and analyzing RF signals
 There are currently 3 known methods for capturing and analyzing RF signals from your ComfoFan system:
