@@ -231,7 +231,7 @@ To do.
 |  0B   	| 1 byte	| speed      	| Current speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
 |  0C   	| 1 byte	| voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
 |  0D   	| 1 byte	| flags     	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set speed)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
-|  0E   	| 1 byte	| ????      	| ????? (Next command = `0x05` ?) |
+|  0E   	| 1 byte	| ????      	| ????? |
 |  0F   	| 1 byte	|`0x00`   	  | |
 |  10   	| 1 byte	|`0x00`     	| |
 |  11   	| 1 byte	|`0x00`     	| |
