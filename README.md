@@ -20,12 +20,12 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 
 | Value | Type               |
 |:-----:|:-------------------|
-|`0x00` | ??? Broadcast?     |
+|`0x00` | Broadcast ?        |
 |`0x01` | Main Unit          |
 |`0x03` | RFZ remote control |
 |`0x04` | ???                |
 |`0x16` | Timer RF remote    |
-|`0x18` | CO2 remote         |
+|`0x18` | CO2 RF sensor      |
 |`0x19` | CO2 slave monitor? |
 |`0x1C` |                    |
 
@@ -239,14 +239,20 @@ To do.
 |  13   	| 1 byte	|`0x00`   	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
-Values seen for parameter 1-4 (`0x0B`-`0x0E`) are:<br>
-```
-0x01, 0x1E, 0x00, 0x05
-0x02, 0x32, 0x00, 0x05
-0x03, 0x5A, 0x00, 0x05
-0x03, 0x5A, 0x01, 0x05
-0x03, 0x5A, 0x02, 0x03 (in reply to 0x02 (speed) 0x01 (params) 0x03 (speed)
-```
+Parameter 3 at offset `0x0D` seems to be a flag byte. Values seen are: `0x00`, `0x01`, `0x02`<br>
+bit 0: 0=timer is off / 1 = timer is on<br>
+bit 1: ???<br>
+bit 2: ???<br>
+bit 3: ???<br>
+bit 4: ???<br>
+bit 5: ???<br>
+bit 6: ???<br>
+bit 7: ???<br>
+
+Parameter 4 at offset `0x0E` seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are:<br>
+`0x03`: ?<br>
+`0x05`: seen on Comfofan CFMe R<br>
+`0x06`: ?<br>
 
 #### Command 0x08: ???
 I haven't captured any frames of this type yet.
@@ -356,16 +362,16 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|`0x00`       | Receiver Type: broadcast |
-|  05   	| 1 byte	|`0x00`       | Receiver ID: broadcast	|
+|  04   	| 1 byte	|`0x00`       | Receiver Type: always `0x00`: broadcast |
+|  05   	| 1 byte	|`0x00`       | Receiver ID: always `0x00`: broadcast	|
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x1D`      	| Command:<br>`0x1D`: Last known configuration?	|
 |  0A   	| 1 byte	|`0x03`   	  | Number of parameters:<br>3 parameters|
-|  0B   	| 1 byte	|`0x76`      	| `0x76`: Always this value??? (is 118 dec.) |
+|  0B   	| 1 byte	|`0x76`      	| ??? |
 |  0C   	| 1 byte	| voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
-|  0D   	| 1 byte	|`0x28`     	| `0x28`: Always this value. Did not observe any other value. |
+|  0D   	| 1 byte	|`0x28`     	| ??? |
 |  0E   	| 1 byte	|`0x00`      	| |
 |  0F   	| 1 byte	|`0x00`      	| |
 |  10   	| 1 byte	|`0x00`       | |
@@ -373,6 +379,9 @@ To do.
 |  12   	| 1 byte	|`0x00`      	| |
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
+
+Parameter 1 at offset `0x0B` is still unknown. Values seen: `0x05`, `0x11`, `0x76`
+Parameter 3 at offset `0x0D` seems to be always the same value. I have seen different values on different ComfoFan's, so it might indicate the type of Comfofan,  software version, the dip-switch settings or maybe some other settings? Values seen are: `0x00`, `0x28`, `0x2E`, `0x4E`, `0x51`, `0x52`, `0x54`, `0x55`, `0x56`, `0x57`<br>
 
 ## Capturing and analyzing RF signals
 There are currently 3 known methods for capturing and analyzing RF signals from your ComfoFan system:
