@@ -150,7 +150,7 @@ To do.
 
 Network address in parameters 1-4 (`0x0B`-`0x0E`) is the same as network address at `0x00-0x03`. This frame is only sent by the RFZ during the linking sequence.
 
-#### Command 0x05: ???
+#### Command 0x05: Reply to set speed / timer ?
 To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
