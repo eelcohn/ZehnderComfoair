@@ -1,0 +1,7 @@
+U1  PIC16F913
+U2  nRF905
+R1  ?
+R2  n.f.
+R3  ?
+X1  4MHz
+
