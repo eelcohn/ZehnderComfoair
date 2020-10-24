@@ -381,7 +381,7 @@ To do.
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
 Parameter 1 at offset `0x0B` is still unknown. Values seen: `0x05`, `0x11`, `0x76`
-Parameter 3 at offset `0x0D` is still unknown. It seems to be most of the same value. Only 1 user has seen different values for the same setup (`0x33` and `0x34`). Different ComfoFans report different values, so it might indicate the type of Comfofan, software version, the dip-switch settings or maybe some other settings? Values seen are: `0x00`, `0x28`, `0x2C`, `0x2E`, `0x33`, `0x34` `0x4E`, `0x51`, `0x52`, `0x54`, `0x55`, `0x56`, `0x57`<br>
+Parameter 3 at offset `0x0D` is still unknown. It seems to be most of the same value. Only 1 user has seen different values for the same setup (`0x33` and `0x34`). Different ComfoFans report different values, so it might indicate the type of Comfofan, software version, the dip-switch settings or maybe some other settings? It could also mean the CO2-level? Values seen are: `0x00`, `0x28`, `0x2C`, `0x2E`, `0x33`, `0x34` `0x4E`, `0x51`, `0x52`, `0x54`, `0x55`, `0x56`, `0x57`<br>
 This message differs from other message types because the `0x1D` message is always a broadcast to all (`0x00` `0x00`).
 
 ## Capturing and analyzing RF signals
