@@ -54,8 +54,8 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| Receiver Type	|
-|  05   	| 1 byte	|           	| Receiver ID	|
+|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set voltage on a fan unit |
+|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
@@ -72,6 +72,8 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |  13   	| 1 byte	|`0x00`   	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
+Receiver ID at offset `0x05` is always `0x00`: broadcast, but you can also target a specific fan.
+
 Voltage at offset 0B is in the range from 0x00 - 0x7F, which is 000 - 127 decimal, and represents 0.0V to 12.7V. The maximum output voltage to the fan seems to be 10.5V, so all values from 106 to 127 result in an output voltage of 10.5V. Values from 0x80 to 0xFF (128 - 255 decimal) result in the same values from 0x00-0x7F. The MSB bit 7 therefore seems to be ignored.
 
 #### Command 0x02: Set speed
@@ -80,8 +82,8 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|           	| Receiver Type	|
-|  05   	| 1 byte	|           	| Receiver ID	|
+|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set speed on a fan unit |
+|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
@@ -98,14 +100,16 @@ To do.
 |  13   	| 1 byte	|`0x00`   	  | |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
 
+Receiver ID at offset `0x05` is always `0x00`: broadcast, but you can also target a specific fan.
+
 #### Command 0x03: Set timer
 To do.
 | Offset  | Size   	| Value     	| Description 	|
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|`0x01`     	| Receiver Type: Always the main unit |
-|  05   	| 1 byte	|`0x00`     	| Receiver ID: Always 0x00 like it is a broadcast to to any main unit |
+|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set timer on a fan unit |
+|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
@@ -121,6 +125,8 @@ To do.
 |  12   	| 1 byte	|`0x00`     	| |
 |  13   	| 1 byte	|`0x00`     	| |
 |  14-15 	| 2 bytes |         	  | 16-bit CRC	|
+
+Receiver ID at offset `0x05` is always `0x00`: broadcast, but you can also target a specific fan.
 
 For the official RF remote control the speed is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
 Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
