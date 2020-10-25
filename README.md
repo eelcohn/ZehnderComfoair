@@ -390,7 +390,7 @@ To do.
 Parameter 1 at offset `0x0B` is still unknown. Values seen: `0x05`, `0x11`, `0x76`<br>
 Parameter 3 at offset `0x0D` is still unknown. It seems to be almost always the same value. Only 1 user has seen different values for the same setup (`0x33` and `0x34`). Different ComfoFans report different values, so it might indicate the type of Comfofan, software version, the dip-switch settings or maybe some other settings? It could also mean the CO2-level?<br>
 When parameter 1 is `0x05` the values seen so far  are: `0x4C`, `0x4E`, `0x4F`, `0x50`, `0x51`, `0x52`, `0x53`, `0x54`, `0x55`, `0x56`, `0x57`, `0x58`, `0x59`, `0x5D`<br>
-When parameter 1 is `0x11` the values seen so far  are: `0x2D`, `0x2E`<br>
+When parameter 1 is `0x11` the values seen so far  are: `0x2D`, `0x2E`, `0x33`, `0x34`<br>
 When parameter 1 is `0x76` the values seen so far  are: `0x23`, `0x24`, `0x25`, `0x26`, `0x27`, `0x28`, `0x2C`<br>
 `0x00`, `0x2C`, `0x33`, `0x34`: unsure if these relate to a specific value for parameter 1<br>
 This message differs from other message types because the `0x1D` message is always a broadcast to all (`0x00` `0x00`).<br>
