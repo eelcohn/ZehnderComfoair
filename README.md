@@ -376,9 +376,9 @@ To do.
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x1D`      	| Command:<br>`0x1D`: Last known configuration?	|
 |  0A   	| 1 byte	|`0x03`   	  | Number of parameters:<br>3 parameters|
-|  0B   	| 1 byte	|`0x76`      	| ??? |
+|  0B   	| 1 byte	| ???       	| `0x05`<br>`0x11`<br>`0x76` |
 |  0C   	| 1 byte	| voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
-|  0D   	| 1 byte	|`0x28`     	| ??? |
+|  0D   	| 1 byte	| ???       	| When parameter 1 is `0x05`: `0x4C`, `0x4E-0x59`, `0x5D`<br>When paramerer 1 is `0x11`: `0x21`, `0x26`, `0x28`, `0x2A`, `0x2C-0x37`<br>When parameter 1 is `0x76`: `0x23-0x2C` |
 |  0E   	| 1 byte	|`0x00`      	| |
 |  0F   	| 1 byte	|`0x00`      	| |
 |  10   	| 1 byte	|`0x00`       | |
