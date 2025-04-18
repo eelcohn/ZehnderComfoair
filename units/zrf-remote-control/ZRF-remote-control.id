@@ -1,0 +1,6 @@
+Remote control:
+ChipID: 0x13E
+Rev. 02
+Config word 0x2007:		0x3024
+Calibration Word 0x2008:	0x2138
+Calibration Word 0x2009:	0x3FF9
