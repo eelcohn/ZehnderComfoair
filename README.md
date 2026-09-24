@@ -129,7 +129,7 @@ To do.
 
 Receiver ID at offset `0x05` is always `0x00`: broadcast, but you can also target a specific fan.
 
-For the official RF remote control the speed is always `0x03`, but you can use custom values like `0x01` or `0x02` as well. Or `0x04` in case of a Timer RF control. 
+For the official RF remote control the speed is always `0x03`. The Timer RF control also supports `0x04`. You can use custom values for speed like `0x01` or `0x02` as well, but these values never show up when capturing data from a RF remote control or Timer RF.
 Duration is always `0x0A` (10) or `0x1E` (30) for the official ZRF, but this is customizable as well.
 
 #### Command 0x04: Current network address ?
