@@ -55,8 +55,8 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set voltage on a fan unit |
-|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
+|  04   	| 1 byte	|           	| Receiver Type |
+|  05   	| 1 byte	|           	| Receiver ID	|
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
@@ -83,8 +83,8 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set speed on a fan unit |
-|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
+|  04   	| 1 byte	|           	| Receiver Type |
+|  05   	| 1 byte	|           	| Receiver ID	|
 |  06   	| 1 byte	|           	| Transmitter Type |
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
@@ -109,8 +109,8 @@ To do.
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
 |  00-03  | 4 bytes |             | Network address |
-|  04   	| 1 byte	|`0x01`     	| Receiver Type:<br>`0x01`set timer on a fan unit |
-|  05   	| 1 byte	|`0x00`     	| Receiver ID:<br>`0x00`: broadcast to all fans<br>`ID`: target one specific fan |
+|  04   	| 1 byte	|           	| Receiver Type |
+|  05   	| 1 byte	|           	| Receiver ID	|
 |  06   	| 1 byte	|           	| Transmitter Type	|
 |  07   	| 1 byte	|           	| Transmitter ID |
 |  08   	| 1 byte	|             | Time-To-Live |
