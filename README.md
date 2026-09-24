@@ -62,7 +62,7 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |  08   	| 1 byte	|             | Time-To-Live |
 |  09   	| 1 byte	|`0x01`      	| Command:<br>`0x01`: Set voltage	|
 |  0A   	| 1 byte	|`0x01`     	| Number of parameters:<br>1 parameter	|
-|  0B   	| 1 byte	| Voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (0x00 is 0d)<br>`0x1E`: 3.0 volt (0x1E is 30d)<br>`0x32`: 5.0 volt (0x32 is 50d)<br>`0x5A`: 9.0 volt (0x5A is 90d)<br>`0x64`: 10.0 volt (0x64 is 100d) |
+|  0C   	| 1 byte	| voltage   	| Fan voltage:<br>`0x00`: 0.0 volt (`0x00` is `0d`)<br>`0x1E`: 3.0 volt (`0x1E` is `30d`)<br>`0x32`: 5.0 volt (`0x32` is `50d`)<br>`0x5A`: 9.0 volt (`0x5A` is `90d`)<br>`0x64`: 10.0 volt (`0x64` is `100d`) |
 |  0C   	| 1 byte	|`0x00`     	| |
 |  0D   	| 1 byte	|`0x00`     	| |
 |  0E   	| 1 byte	|`0x00`     	| |
@@ -238,7 +238,7 @@ To do.
 |  09   	| 1 byte	|`0x07`      	| Command:<br>`0x07`: Reply/acknowledge	|
 |  0A   	| 1 byte	|`0x04`     	| Number of parameters:<br>4 parameters	|
 |  0B   	| 1 byte	| speed      	| Current speed setting:<br>`0x01`: low<br>`0x02`: medium<br>`0x03`: high<br>`0x04`: max |
-|  0C   	| 1 byte	| voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt<br>`0x1E`: 3.0 volt<br>`0x32`: 5.0 volt<br>`0x5A`: 9.0 volt<br>`0x64`: 10.0 volt |
+|  0C   	| 1 byte	| voltage   	| Current fan voltage:<br>`0x00`: 0.0 volt (`0x00` is `0d`)<br>`0x1E`: 3.0 volt (`0x1E` is `30d`)<br>`0x32`: 5.0 volt (`0x32` is `50d`)<br>`0x5A`: 9.0 volt (`0x5A` is `90d`)<br>`0x64`: 10.0 volt (`0x64` is `100d`) |
 |  0D   	| 1 byte	| flags     	| Timer flag:<br>`0x00`: timer is off (set after `0x02`: Set speed)<br>`0x01`: timer is on (set after `0x03`: Set Timer)<br>`0x02`: ??? |
 |  0E   	| 1 byte	| parameter 4 | ????? |
 |  0F   	| 1 byte	|`0x00`   	  | |
