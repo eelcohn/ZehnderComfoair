@@ -21,10 +21,10 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 | Value | Type                    |
 |:-----:|:------------------------|
 |`0x00` | Broadcast ?             |
-|`0x01` | Main Unit               |
+|`0x01` | Fan                     |
 |`0x03` | RFZ remote control      |
-|`0x04` | ???                     |
-|`0x06` | ???                     |
+|`0x04` |                         |
+|`0x06` |                         |
 |`0x0B` | ? sensor like the CO2 ? |
 |`0x16` | Timer RF remote control |
 |`0x18` | CO2 RF sensor           |
