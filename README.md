@@ -35,18 +35,18 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 
 | Value | Command                         | Number of parameters |
 |:-----:|:--------------------------------|:--------------------:|
-|`0x01` | Set voltage                     | 0x01                 |
-|`0x02` | Set speed                       | 0x01                 |
-|`0x03` | Set timer                       | 0x02                 |
-|`0x04` | Current network address ?       | 0x04                 |
-|`0x05` | Reply to set speed / timer ?    | 0x03                 |
-|`0x06` | Main unit available for linking | 0x04                 |
-|`0x07` | Current fan settings            | 0x04                 |
-|`0x0B` | Linking successful              | 0x00                 |
-|`0x0C` | RFZ available for linking       | 0x04                 |
-|`0x0D` | Query device with broadcast ?   | 0x00                 |
-|`0x10` | Query device ?                  | 0x00                 |
-|`0x1D` | Reply to set voltage ?          | 0x03                 |
+|`0x01` | Set voltage                     | 1                    |
+|`0x02` | Set speed                       | 1                    |
+|`0x03` | Set timer                       | 2                    |
+|`0x04` | Current network address ?       | 4                    |
+|`0x05` | Reply to set speed / timer ?    | 3                    |
+|`0x06` | Main unit available for linking | 4                    |
+|`0x07` | Current fan settings            | 4                    |
+|`0x0B` | Linking successful              | 0                    |
+|`0x0C` | RFZ available for linking       | 4                    |
+|`0x0D` | Query device with broadcast ?   | 0                    |
+|`0x10` | Query device ?                  | 0                    |
+|`0x1D` | Reply to set voltage ?          | 3                    |
 
 ### Commands:
 
