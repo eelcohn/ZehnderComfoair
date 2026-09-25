@@ -1,8 +1,11 @@
 # Reverse engineering the ComfoFan ventilation RF-protocol
 
-ComfoFan is a house ventilation model sold under several brands like Zehnder, StorkAir, BUVA and others.
+ComfoFan is a home ventilation fan device sold under several brands like [Zehnder](https://www.zehnder.nl/), [StorkAir](https://www.zehnder.nl/nl/service-kennis/service/je-stork-air-vervangen-door-zehnder), [BUVA](https://shop.buva.nl/nl-nl/ventilatie-1/toebehoren-mv-wtw-smartvalve/toebehoren-mechanische-ventilatie/) and others.
 
 ### RF protocol:
+
+#### Overview:
+
 * Frequency: 868440000 Hz
 * Modulation: GFSK (Gaussian Frequency Shift Keying) (nRF905 default)
 * Bitrate: 100kbps (nRF905 default)
@@ -10,13 +13,15 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 * Frame size: 6 bit preamble + 22 bytes (the nRF905 adds 6 bytes to the payload: 4 rx address bytes and 2 CRC bytes)
 * nRF905 payload size: 16 bytes (from offset `0x04` to `0x13`)
 
-### Frame format:
+#### Frame format:
 
 | Preamble    | Network<br>Address | Rx<br>Type | Rx<br>ID | Tx<br>Type | Tx<br>ID | TTL | Command | Parameter count | Parameters | 16-bit CRC |
 |:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
 | 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
 
-##### Transmitter and receiver types:
+### Devices:
+
+#### Transmitter and receiver types:
 
 | Value | Type                    |
 |:-----:|:------------------------|
@@ -31,7 +36,9 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |`0x19` | CO2 slave monitor?      |
 |`0x1C` |                         |
 
-##### Commands:
+### Commands:
+
+#### Overview:
 
 | Value | Command                         | Number of parameters |
 |:-----:|:--------------------------------|:--------------------:|
@@ -47,8 +54,6 @@ ComfoFan is a house ventilation model sold under several brands like Zehnder, St
 |`0x0D` | Query device with broadcast ?   | 0                    |
 |`0x10` | Query device ?                  | 0                    |
 |`0x1D` | Reply to set voltage ?          | 3                    |
-
-### Commands:
 
 #### Command 0x01: Set voltage
 | Offset  | Size   	| Value     	| Description 	|
@@ -398,15 +403,18 @@ When parameter 1 is `0x76` the values seen so far  are: `0x23`, `0x24`, `0x25`, 
 This message differs from other message types because the `0x1D` message is always a broadcast to all (`0x00` `0x00`).<br>
 
 ## Capturing and analyzing RF signals
+
+#### Overview
+
 There are currently 3 known methods for capturing and analyzing RF signals from your ComfoFan system:
 1. Use the [nRF905-API](https://github.com/eelcohn/nRF905-API/)
 2. With rtl_433 and a RTL-SDR
 3. With URH and a RTL-SDR
 
-### Analyzing RF signal with nRF905-API
+#### Analyzing RF signal with nRF905-API
 See the [nRF905-API](https://github.com/eelcohn/nRF905-API/) page for building/installing. Use the `/api/v1/receive.json` API endpoint to capture data.
 
-### Analyzing RF signal with a RTL-SDR and rtl_433
+#### Analyzing RF signal with a RTL-SDR and rtl_433
 1. Install [rtl_433](https://github.com/merbanan/rtl_433)
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start rtl_433 using the following command:
@@ -415,7 +423,7 @@ rtl_433 -f 868400000 -g 10000 -S known -R 0 -X n=zehnder,m=FSK_MC_ZEROBIT,s=10,r
 ```
 The readable data will be written to the `Zehnder-log.csv` file.
 
-### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
+#### Analyzing RF signal with a RTL-SDR and Universal Radio Hacker
 1. Install [Universal Radio Hacker](https://github.com/jopohl/urh) (URH)
 2. Plug your [RTL-SDR](https://www.rtl-sdr.com/) into an USB port
 3. Start URH
@@ -434,7 +442,7 @@ The readable data will be written to the `Zehnder-log.csv` file.
 11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
 12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
-### Reference links
+## Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
 * [Reverse Engineering - Weather Station RF signals with an SDR and URH
 ](https://docs.google.com/document/d/1yjAO3jTBa9lAFIuiteK_GLWh7-Xk-kSD2d0DUxQe_vU/edit)
