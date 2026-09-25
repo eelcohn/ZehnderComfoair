@@ -1,6 +1,7 @@
 # Reverse engineering the ComfoFan ventilation RF-protocol
 
 ComfoFan is a home ventilation fan device sold under several brands like [Zehnder](https://www.zehnder.nl/), [StorkAir](https://www.zehnder.nl/nl/service-kennis/service/je-stork-air-vervangen-door-zehnder), [BUVA](https://shop.buva.nl/nl-nl/ventilatie-1/toebehoren-mv-wtw-smartvalve/toebehoren-mechanische-ventilatie/) and others.
+<br/>
 
 ### RF protocol:
 
@@ -18,6 +19,7 @@ ComfoFan is a home ventilation fan device sold under several brands like [Zehnde
 | Preamble    | Network<br>Address | Rx<br>Type | Rx<br>ID | Tx<br>Type | Tx<br>ID | TTL | Command | Parameter count | Parameters | 16-bit CRC |
 |:-----------:|:------------------:|:----------:|:--------:|:----------:|:--------:|:---:|:-------:|:---------------:|:----------------:|-----------:|
 | 10-bits<br>1111110101  | 4 bytes         | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte | 1 byte  | 1 byte          | 9 bytes    | 2 bytes    |
+<br/>
 
 ### Devices:
 
@@ -35,6 +37,7 @@ ComfoFan is a home ventilation fan device sold under several brands like [Zehnde
 |`0x18` | CO2 RF sensor           |
 |`0x19` | CO2 slave monitor?      |
 |`0x1C` |                         |
+<br/>
 
 ### Commands:
 
@@ -401,6 +404,7 @@ When parameter 1 is `0x11` the values seen so far  are: `0x21`, `0x26`, `0x28`, 
 When parameter 1 is `0x76` the values seen so far  are: `0x23`, `0x24`, `0x25`, `0x26`, `0x27`, `0x28`, `0x29`, `0x2A`, `0x2B`, `0x2C`<br>
 `0x00`, `0x2C`, `0x33`, `0x34`: unsure if these relate to a specific value for parameter 1<br>
 This message differs from other message types because the `0x1D` message is always a broadcast to all (`0x00` `0x00`).<br>
+<br/>
 
 ## Capturing and analyzing RF signals
 
