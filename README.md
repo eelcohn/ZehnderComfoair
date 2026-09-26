@@ -325,8 +325,8 @@ When you press the *Timer* button together with one of the other buttons on the 
 |  13   	| 1 byte	|`0x00`      	| |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
-#### Command 0x0D: ???
-To do.
+#### Command 0x0D: Query device / network
+Query device (fan) or network (all devices) for last known settings. The fan unit will reply with `0x07`
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
@@ -336,7 +336,7 @@ To do.
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	|`0xFA`       | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	|`0x0D`      	| Command:<br>`0x0D`: ?????	|
+|  09   	| 1 byte	|`0x0D`      	| Command:<br>`0x0D`: Query device / network	|
 |  0A   	| 1 byte	|`0x00`   	  | Number of parameters:<br>0 parameters|
 |  0B   	| 1 byte	|`0x00`      	| |
 |  0C   	| 1 byte	|`0x00`      	| |
@@ -349,8 +349,8 @@ To do.
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
-#### Command 0x10: Query device
-Query device (fan) for last known settings. The fan unit will reply with `0x07`
+#### Command 0x10: Query device / network with repeat
+Query device (fan) or network (all devices) for last known settings. The fan unit will reply with `0x07`
 | Offset  | Size   	| Value   	  | Description 	|
 |:------: |:------:	|:-----------:|-------------	|
 |         | 10 bits |`1111110101b`| Preamble |
@@ -360,7 +360,7 @@ Query device (fan) for last known settings. The fan unit will reply with `0x07`
 |  06   	| 1 byte	|            	| Transmitter Type |
 |  07   	| 1 byte	|             | Transmitter ID |
 |  08   	| 1 byte	|`0xFA`       | Time-To-Live (always `0xFA`) |
-|  09   	| 1 byte	|`0x10`      	| Command:<br>`0x10`: Query device	|
+|  09   	| 1 byte	|`0x10`      	| Command:<br>`0x10`: Query device / network|
 |  0A   	| 1 byte	|`0x00`   	  | Number of parameters:<br>0 parameters|
 |  0B   	| 1 byte	|`0x00`      	| |
 |  0C   	| 1 byte	|`0x00`      	| |
@@ -372,6 +372,8 @@ Query device (fan) for last known settings. The fan unit will reply with `0x07`
 |  12   	| 1 byte	|`0x00`      	| |
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
+
+This command is the same as `0x0D`: Query device, with one difference: the fan unit(s) first retransmit the same query and then respond with `0x07`: Current fan settings.
 
 #### Command 0x1D: Reply to set voltage ?
 To do.
