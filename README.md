@@ -373,7 +373,7 @@ Query device (fan) or network (all devices) for last known settings. The fan uni
 |  13   	| 1 byte	|`0x00`       | |
 |  14-15 	| 2 bytes |            	| 16-bit CRC	|
 
-This command is the same as `0x0D`: Query device, with one difference: the fan unit(s) first retransmit the same query and then respond with `0x07`: Current fan settings.
+This command is the same as `0x0D`: Query device, with one difference: the fan unit(s) first retransmit the same query and then respond with `0x07`: Current fan settings. This can be useful for networks where the physical distance between different devices is larger than the range of the nRF905 transmitter (mesh networking).
 
 #### Command 0x1D: Reply to set voltage ?
 To do.
