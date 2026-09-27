@@ -448,6 +448,24 @@ The readable data will be written to the `Zehnder-log.csv` file.
 11. Enter *1111110101* (the 10-bit nRF905 preamble bits) in the *Search* box and click *Search*
 12. Congratulations! You just found the start of a frame sent by your Zehnder ZRF remote control! Select the first 176 columns after the preamble (176 bits = 22 bytes), select the Hex value and copy/paste them to your favourite text editor
 
+## Disclaimer
+
+This project is an independent, unofficial project. It is not affiliated with, endorsed by or supported by
+Zehnder Group, BUVA, ESPHome, Nabu Casa or any other manufacturer or organisation mentioned. All product names,
+trademarks and other intellectual property of third parties mentioned in this project remain the property of
+their respective owners and are used for identification and interoperability only.
+
+The information and software in this project are provided "as is", for personal and educational use, without
+warranty of any kind, express or implied, including fitness for a particular purpose. The protocol description
+was obtained by observing radio traffic and may be incomplete or wrong. Using this project to control
+ventilation equipment is at your own risk: it may, for example, affect the equipment's warranty, or its
+ventilation of your home.
+
+You must not use this project, or any information in it, in a harmful or illegal way, including in ways that
+violate radio regulations or the rights of others. The author(s) of this project and the owners of any
+third-party intellectual property cannot be held liable for any damage or loss resulting from the use or
+misuse of this project or its information.
+
 ## Reference links
 * [Reverse Engineering Weather Station RF Signals with an RTL-SDR](https://www.rtl-sdr.com/tag/universal-radio-hacker/)
 * [Reverse Engineering - Weather Station RF signals with an SDR and URH
